@@ -3,4 +3,10 @@
     <string name="ID">학번</string>
     <string name="PW">비밀번호</string>
     <string name="login_SejongClassic">세종대학교\n고전독서인증</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navi_1">인증 현황</string>
+    <string name="navi_2">예약 신청</string>
+    <string name="navi_3">도서 검색</string>
+    <string name="navi_4">설정</string>
 </resources>

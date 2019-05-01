@@ -1,21 +1,72 @@
 package com.seosj.classicbook;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    //4개의 메뉴에 들어갈 Fragment들
+    private Menu1Fragment menu1Fragment = new Menu1Fragment();
+    private Menu2Fragment menu2Fragment = new Menu2Fragment();
+    private Menu3Fragment menu3Fragment = new Menu3Fragment();
+    private Menu4Fragment menu4Fragment = new Menu4Fragment();
+
+
+
+
+
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        //인증현황 menu_home
+        //예약신청 menu_reservation_test
+        //도서 검색 menu_search
+        //설정 menu_settings
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            switch (item.getItemId()) {
+                case R.id.navigation_1:
+                    transaction.replace(R.id.frame_layout,menu1Fragment).commitAllowingStateLoss();
+                    return true;
+                case R.id.navigation_2:
+                    transaction.replace(R.id.frame_layout,menu2Fragment).commitAllowingStateLoss();
+                    return true;
+                case R.id.navigation_3:
+                    transaction.replace(R.id.frame_layout,menu3Fragment).commitAllowingStateLoss();
+                    return true;
+                case R.id.navigation_4:
+                    transaction.replace(R.id.frame_layout,menu4Fragment).commitAllowingStateLoss();
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    //자동로그인일 경우 메인으로 바로 와야한다!
-    //Bottom Navigation Activity로 바꿀것
 
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        // BottomNavigationView 메뉴를 선택할 때마다 위치가 변하지 않도록
+        NavigationHelper.disableShiftMode(navigation);
+        // 첫 화면 지정
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
+
+
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
-
 
 
 

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#A73A3C</color>
+    <color name="colorMain">#FFFFFF</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorSejongRED">#A73A3C</color>
+    <color name="colorTestRed">#D9ADAF</color>
+    <!-- color high light-->
+    <color name="login_button_ripple">#963A3C</color>
+    <color name="all_button_ripple">#737373</color>
+    <color name="test_button_ripple">#A73A3C</color>
 </resources>

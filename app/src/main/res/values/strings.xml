@@ -3,10 +3,26 @@
     <string name="ID">학번</string>
     <string name="PW">비밀번호</string>
     <string name="login_SejongClassic">세종대학교\n고전독서인증</string>
+    <string name="login">로그인</string>
+    <string name="auto_login">자동로그인</string>
     <string name="title_activity_main">MainActivity</string>
+
 
     <string name="navi_1">인증 현황</string>
     <string name="navi_2">예약 신청</string>
     <string name="navi_3">도서 검색</string>
     <string name="navi_4">설정</string>
+
+    <string name="user_hello">서성준님,\n안녕하세요</string>
+
+    <string name="cat_1">서양의역\n사와사상</string>
+    <string name="cat_2">동양의역\n사와사상</string>
+    <string name="cat_3">동서양의\n문학</string>
+    <string name="cat_4">과학사상\t</string>
+
+    <string name="cat_cnt">0/0권</string>
+
+    <string name="home_text_thisweektest">이번 주 시험 응시 예정</string>
+    <string name="home_text_test_date">2019\-03\-19\n10:00~10:20</string>
+    <string name="home_text_test_info">광108B\n도서명: 실락원</string>
 </resources>

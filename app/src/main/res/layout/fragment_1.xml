@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="4">
+    android:weightSum="4.3">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -18,15 +18,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:paddingStart="28dp"
+            android:text="@string/user_hello"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/img_user"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:padding="60dp"
+            android:padding="0dp"
             app:srcCompat="@drawable/ic_user" />
     </LinearLayout>
 
@@ -35,7 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_weight="1"
+        android:layout_weight="1.3"
+        android:background="@drawable/ripple_effect_login"
         android:text="고전독서인증" />
 
     <LinearLayout
@@ -50,21 +54,23 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_seo"
+            <com.seosj.classicbook.CustomCategory
+                android:id="@+id/customcat1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="서양" />
+                app:bg="@drawable/ripple_effect_categorybook1"
+                app:symbol1="@string/cat_1"
+                app:symbol2="@string/cat_cnt" />
 
-            <Button
-                android:id="@+id/button_dong"
+            <com.seosj.classicbook.CustomCategory
+                android:id="@+id/customcat2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="동양" />
+                app:bg="@drawable/ripple_effect_categorybook2"
+                app:symbol1="@string/cat_2"
+                app:symbol2="@string/cat_cnt" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,22 +79,23 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_dongseo"
+            <com.seosj.classicbook.CustomCategory
+                android:id="@+id/customcat3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:padding="5dp"
-                android:text="동서양" />
+                app:bg="@drawable/ripple_effect_categorybook3"
+                app:symbol1="@string/cat_3"
+                app:symbol2="@string/cat_cnt" />
 
-            <Button
-                android:id="@+id/button_science"
+            <com.seosj.classicbook.CustomCategory
+                android:id="@+id/customcat4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="과학" />
+                app:bg="@drawable/ripple_effect_categorybook4"
+                app:symbol1="@string/cat_4"
+                app:symbol2="@string/cat_cnt" />
         </LinearLayout>
     </LinearLayout>
 
@@ -104,14 +111,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="이번 주 시험 응시 예정" />
+            android:gravity="center|start"
+            android:paddingStart="7dp"
+            android:paddingTop="2dp"
+            android:text="@string/home_text_thisweektest"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/button_infotest"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView1"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Button" />
+            android:layout_height="match_parent"
+            android:background="#FFFFFF" />
 
         <View
             android:id="@+id/view5"

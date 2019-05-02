@@ -1,5 +1,6 @@
 package com.seosj.classicbook;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class RecyclerAdapter_Setting extends RecyclerView.Adapter<RecyclerAdapte
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
         holder.onBind(listData1.get(position));
+
     }
 
     @Override
@@ -42,13 +44,13 @@ public class RecyclerAdapter_Setting extends RecyclerView.Adapter<RecyclerAdapte
     }
     // RecyclerView의 핵심인 ViewHolder 입니다.
     // 여기서 subView를 setting 해줍니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+    class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView imageView1;
         private TextView textView1;
         private TextView textView2;
         private ImageView imageView2;
-
+        private Data_Recycle_Setting data;
         ItemViewHolder(View itemView) {
             super(itemView);
 
@@ -59,11 +61,32 @@ public class RecyclerAdapter_Setting extends RecyclerView.Adapter<RecyclerAdapte
         }
 
         void onBind(Data_Recycle_Setting data) {
+            this.data = data;
             imageView1.setImageResource(data.getResId1());
             textView1.setText(data.getTitle());
             textView2.setText(data.getUser_id());
             imageView2.setImageResource(data.getResId2());
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v){
+            switch (v.getId()){
+                case R.id.setting_linearitembox:
+                    if(data.getTitle().equals("인증방법 및 절차")){
+                        Intent intent = new Intent(v.getContext(),Webview_setting_1.class);
+                        intent.putExtra("case","1");
+                        v.getContext().startActivity(intent);
+                    }else if(data.getTitle().equals("인증도서 목록")){
+                        Intent intent = new Intent(v.getContext(),Webview_setting_1.class);
+                        intent.putExtra("case","2");
+                        v.getContext().startActivity(intent);
+                    }
+                    break;
+            }
+        }
+
     }
 
 }

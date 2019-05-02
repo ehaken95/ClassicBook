@@ -7,6 +7,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.Toast;
+
+import com.gun0912.tedpermission.PermissionListener;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -18,6 +23,14 @@ public class LoginActivity extends AppCompatActivity {
 
         //자동로그인일 경우 메인으로 바로 가야한다!
 
+        /*권한 얻기
+        TedPermission.with(this)
+                .setPermissionListener(permissionlistener)
+                .setRationaleMessage("권한 설정")
+                .setDeniedMessage("거부하셨습니다.\n어플리케이션을 원활히 이용하기 위해서는\n" +
+                        "[설정]->[어플리케이션]->[권한]에서 권한을 허용해 주시기 바랍니다.")
+                .setPermissions()
+        */
 
 
         EditText text_id = findViewById(R.id.textID);
@@ -58,7 +71,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    PermissionListener permissionlistener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            Toast.makeText(LoginActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
+        }
 
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+            Toast.makeText(LoginActivity.this, "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+
+    };
 
 
 }

@@ -5,12 +5,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Menu3Fragment menu3Fragment = new Menu3Fragment();
     private Menu4Fragment menu4Fragment = new Menu4Fragment();
 
-    private RecyclerAdapter adapter;
+
 
 
     //인증현황 menu_home
@@ -54,11 +49,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        init();
-
-        getData();
-
-
         BottomNavigationView navigation = findViewById(R.id.navigation);
         // BottomNavigationView 메뉴를 선택할 때마다 위치가 변하지 않도록
         NavigationHelper.disableShiftMode(navigation);
@@ -71,33 +61,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    private void init(){
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView1);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        adapter = new RecyclerAdapter();
-        recyclerView.setAdapter(adapter);
-
-    }
-
-    private void getData(){
-
-        List<String> listTitle = Arrays.asList("2019-03-19\n10:00~10:20");
-        List<String> listContent = Arrays.asList("광108B\n도서명: 실락원");
-        List<Integer> listResId = Arrays.asList(R.drawable.ic_button_clickarrow);
-
-        Data data = new Data();
-        data.setTitle(listTitle.get(0));
-        data.setContent(listContent.get(0));
-        data.setResId(listResId.get(0));
-        adapter.addItem(data);
-
-        adapter.notifyDataSetChanged();
-
-    }
 
 
     //뒤로가기 버튼을 두번 연속으로 눌러야 종료되게끔 하는 메소드

@@ -15,4 +15,6 @@
     <color name="color_cat_2">#F5D648</color>
     <color name="color_cat_3">#53B1BC</color>
     <color name="color_cat_4">#407F2A</color>
+    <!-- color bottomnavi -->
+    <color name="color_navi">#F2F2F2</color>
 </resources>

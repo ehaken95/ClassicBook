@@ -40,6 +40,7 @@ public class Menu1Fragment extends Fragment{
 
     private void getData(){
 
+        //추후 자동으로 불러와야 함
         List<String> listTitle = Arrays.asList("2019-03-19\n10:00~10:20");
         List<String> listContent = Arrays.asList("광108B\n도서명: 실락원");
         List<Integer> listResId = Arrays.asList(R.drawable.ic_button_clickarrow);

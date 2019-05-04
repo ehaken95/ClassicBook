@@ -121,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center|start"
             android:paddingStart="7dp"
             android:paddingTop="2dp"
@@ -132,21 +132,13 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView1"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="70dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_weight="1"
             android:background="@drawable/ripple_effect_all"
             android:clickable="true"
             android:elevation="5dp"
             android:overScrollMode="never" />
-
-        <View
-            android:id="@+id/view5"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="0" />
 
     </LinearLayout>
 </LinearLayout>

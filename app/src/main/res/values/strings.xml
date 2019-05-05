@@ -90,11 +90,11 @@
         <item>황금가지</item>
         <item>파이돈</item>
         <item>예루살렘의 아이히만</item>
+        <item>호모루덴스</item>
     </string-array>
     <string-array name="book_name_dongyang">
         <!--동양-->
         <item>도서명</item>
-        <item>호모루덴스</item>
         <item>성학십도</item>
         <item>북학의</item>
         <item>조선상고사</item>
@@ -194,6 +194,13 @@
     <string name="text_library"><u>학술정보원</u></string>
     <string name="text_library_search">고전도서 검색</string>
     <string name="text_select_book1">영역명, 도서명 선택</string>
+
+    <string name="text_search_book_name">book_name</string>
+    <string name="text_search_book_result">검색결과</string>
+    <string name="text_search_book_result_loc"><u>소장위치</u></string>
+    <string name="text_search_book_result_num"><u>청구기호</u></string>
+
+
 
 
     <!--4번메뉴-->

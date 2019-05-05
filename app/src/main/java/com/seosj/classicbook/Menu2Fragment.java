@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -22,12 +21,16 @@ public class Menu2Fragment extends Fragment{
     private Calendar pickedDate = Calendar.getInstance();
     private Calendar minDate = Calendar.getInstance();//다음날
     private Calendar maxDate = Calendar.getInstance();//
+    int mYear;
+    int mMonth;
+    int mDay;
+    TextView DatePickerText;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_2, container, false);
-        TextView DatePickerText = v.findViewById(R.id.text_menu2_datepicker);
+        DatePickerText = v.findViewById(R.id.text_menu2_datepicker);
 
         minDate.add(Calendar.DATE, 1);
         maxDate.add(Calendar.DATE, 30);
@@ -50,18 +53,15 @@ public class Menu2Fragment extends Fragment{
         return v;
     }
 
+
     private void setDate(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 getContext(),
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                (view, year, month, dayOfMonth) -> updateDisplay(year,month,dayOfMonth),
+                mYear = pickedDate.get(Calendar.YEAR),
+                mMonth = pickedDate.get(Calendar.MONTH),
+                mDay = pickedDate.get(Calendar.DAY_OF_MONTH)
 
-                    }
-                },
-                pickedDate.get(Calendar.YEAR),
-                pickedDate.get(Calendar.MONTH),
-                pickedDate.get(Calendar.DAY_OF_MONTH)
         );
 
         datePickerDialog.getDatePicker().setMinDate(minDate.getTime().getTime());
@@ -73,9 +73,14 @@ public class Menu2Fragment extends Fragment{
 
 
 
+    }
 
-
-
+    private void updateDisplay(int year, int month, int day) {
+        DatePickerText.setText(new StringBuilder()
+                        .append(year).append("년 ")
+                        .append(month+1).append("월 ")
+                        .append(day).append("일")
+            );
     }
 
 

@@ -15,9 +15,7 @@ import java.util.List;
 
 public class Menu1Fragment extends Fragment{
 
-    private RecyclerAdapter adapter;
-
-
+    private RecyclerAdapter_testinfo adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,7 +26,7 @@ public class Menu1Fragment extends Fragment{
         RecyclerView recyclerView = v.findViewById(R.id.recyclerView1);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new RecyclerAdapter();
+        adapter = new RecyclerAdapter_testinfo();
         recyclerView.setAdapter(adapter);
 
 

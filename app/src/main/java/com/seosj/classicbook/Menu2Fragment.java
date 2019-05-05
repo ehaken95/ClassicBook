@@ -1,5 +1,6 @@
 package com.seosj.classicbook;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,17 +10,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class Menu2Fragment extends Fragment{
     private RecyclerAdapter adapter;
+    private Calendar pickedDate = Calendar.getInstance();
+    private Calendar minDate = Calendar.getInstance();//다음날
+    private Calendar maxDate = Calendar.getInstance();//
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_2, container, false);
+        TextView DatePickerText = v.findViewById(R.id.text_menu2_datepicker);
+
+        minDate.add(Calendar.DATE, 1);
+        maxDate.add(Calendar.DATE, 30);
+
+        DatePickerText.setOnClickListener(v1 -> setDate());
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView recyclerView = v.findViewById(R.id.recyclerView_testdate);
@@ -35,6 +49,35 @@ public class Menu2Fragment extends Fragment{
 
         return v;
     }
+
+    private void setDate(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                    }
+                },
+                pickedDate.get(Calendar.YEAR),
+                pickedDate.get(Calendar.MONTH),
+                pickedDate.get(Calendar.DAY_OF_MONTH)
+        );
+
+        datePickerDialog.getDatePicker().setMinDate(minDate.getTime().getTime());
+        datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
+
+
+        datePickerDialog.show();
+
+
+
+
+
+
+
+    }
+
 
     private void getData(){
 

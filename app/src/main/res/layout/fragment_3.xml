@@ -79,8 +79,8 @@
 
         <ImageView
             android:id="@+id/button_menu3_search"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:background="@drawable/ripple_effect_round"
             android:clickable="true"

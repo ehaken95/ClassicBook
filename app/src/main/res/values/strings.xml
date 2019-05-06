@@ -172,23 +172,25 @@
     <string name="text_reserv_test">인증 예약 신청</string>
     <string name="text_select_test_book">한달 내 날짜만 선택 가능, 일주일에 1건만 예약 가능, 주말/공휴일 예약 불가</string>
     <string name="datepick">예약일자</string>
-    <string name="text_time1000">시간: <b>10:00</b></string>
-    <string name="text_time1020">시간: <b>10:20</b></string>
-    <string name="text_time1040">시간: <b>10:40</b></string>
-    <string name="text_time1100">시간: <b>11:00</b></string>
-    <string name="text_time1120">시간: <b>11:20</b></string>
-    <string name="text_time1140">시간: <b>11:40</b></string>
-    <string name="text_time1400">시간: <b>14:00</b></string>
-    <string name="text_time1420">시간: <b>14:20</b></string>
-    <string name="text_time1440">시간: <b>14:40</b></string>
-    <string name="text_time1500">시간: <b>15:00</b></string>
-    <string name="text_time1520">시간: <b>15:20</b></string>
-    <string name="text_time1540">시간: <b>15:40</b></string>
-    <string name="text_time1600">시간: <b>16:00</b></string>
-    <string name="text_time1620">시간: <b>16:20</b></string>
-    <string name="text_time1640">시간: <b>16:40</b></string>
+    <string name="text_time">시간: </string>
+    <string name="text_loc">장소: </string>
+    <string name="text_time1000"><b>10:00</b></string>
+    <string name="text_time1020"><b>10:20</b></string>
+    <string name="text_time1040"><b>10:40</b></string>
+    <string name="text_time1100"><b>11:00</b></string>
+    <string name="text_time1120"><b>11:20</b></string>
+    <string name="text_time1140"><b>11:40</b></string>
+    <string name="text_time1400"><b>14:00</b></string>
+    <string name="text_time1420"><b>14:20</b></string>
+    <string name="text_time1440"><b>14:40</b></string>
+    <string name="text_time1500"><b>15:00</b></string>
+    <string name="text_time1520"><b>15:20</b></string>
+    <string name="text_time1540"><b>15:40</b></string>
+    <string name="text_time1600"><b>16:00</b></string>
+    <string name="text_time1620"><b>16:20</b></string>
+    <string name="text_time1640"><b>16:40</b></string>
 
-    <string name="text_test_locaion">장소: <b>광108B</b></string>
+    <string name="text_test_locaion"><b>광108B</b></string>
 
     <!--3번메뉴-->
     <string name="text_library"><u>학술정보원</u></string>

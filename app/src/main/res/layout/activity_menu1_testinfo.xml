@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="9.6">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
+        android:background="#ffffff"
         android:orientation="vertical">
 
         <TextView
@@ -18,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:paddingStart="50dp"
+            android:paddingStart="30dp"
             android:paddingEnd="0dp"
             android:text="@string/text_testinfotitle"
             android:textColor="#000000"
@@ -34,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:paddingStart="50dp"
+                android:paddingStart="30dp"
                 android:paddingEnd="0dp"
                 android:text="@string/text_testbooktitle"
                 android:textColor="#000000"
@@ -51,22 +52,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/ripple_effect_login"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:text="예약취소"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
+
+
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
-        android:layout_weight="8.5"
+        android:layout_weight="9"
+        android:background="#ffffff"
         android:orientation="vertical"
         android:weightSum="10">
 
@@ -75,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:paddingStart="50dp"
+            android:paddingStart="30dp"
             android:paddingEnd="0dp"
             android:text="@string/text_testinfodetail"
             android:textSize="20sp" />
@@ -91,7 +101,7 @@
                 android:id="@+id/text_menu_test_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
@@ -104,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
                 android:text="TextView"
@@ -122,7 +132,7 @@
                 android:id="@+id/text_menu_test_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
@@ -135,7 +145,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
                 android:text="TextView"
@@ -153,7 +163,7 @@
                 android:id="@+id/text_menu_test_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
@@ -166,7 +176,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
                 android:text="TextView"
@@ -178,12 +188,12 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center"
             android:background="@drawable/ripple_effect_test"
+            android:gravity="center"
             android:text="@string/text_setAlarm"
             android:textColor="@color/colorSejongRED" />
 

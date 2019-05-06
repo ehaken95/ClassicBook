@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 public class CustomCategory extends LinearLayout {
 
+    //메인화면 세부카테고리 커스텀위한 코드
     LinearLayout bg;
     TextView symbol1;
     TextView symbol2;

@@ -1,5 +1,6 @@
 package com.seosj.classicbook;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -189,10 +190,13 @@ public class Menu3Fragment extends Fragment{
             @Override
             public void onClick(View v){
                 if(ISBN.equals("0")){
-                 //alertDialog띄우셈
-
+                 //alertDialog띄우
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder
+                            .setMessage("책을 선택해 주세요")
+                            .setPositiveButton("확인", (dialog, which)-> {} );
+                   builder.create().show();
                 }else {
-
 
                     Intent intent = new Intent(v.getContext(), Menu3_searchLibrary.class);
                     intent.putExtra("ISBN",ISBN);

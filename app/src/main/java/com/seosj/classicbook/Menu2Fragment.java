@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Menu2Fragment extends Fragment{
-    private RecyclerAdapter adapter;
+    private RecyclerAdapter_Testreserv adapter;
     private Calendar pickedDate = Calendar.getInstance();
     private Calendar minDate = Calendar.getInstance();//다음날
     private Calendar maxDate = Calendar.getInstance();//
@@ -25,6 +26,7 @@ public class Menu2Fragment extends Fragment{
     int mMonth;
     int mDay;
     TextView DatePickerText;
+    //시험 예약화면
 
     @Nullable
     @Override
@@ -32,17 +34,20 @@ public class Menu2Fragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_2, container, false);
         DatePickerText = v.findViewById(R.id.text_menu2_datepicker);
 
+        //최소/최대 날짜 선택 가능 지정
         minDate.add(Calendar.DATE, 1);
         maxDate.add(Calendar.DATE, 30);
 
+        //주말 아직 미구현됨
         DatePickerText.setOnClickListener(v1 -> setDate());
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView recyclerView = v.findViewById(R.id.recyclerView_testdate);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-        adapter = new RecyclerAdapter();
+        //리사이클러뷰 선
+        recyclerView.addItemDecoration(new DividerItemDecoration(v.getContext(),1));
+        adapter = new RecyclerAdapter_Testreserv();
         recyclerView.setAdapter(adapter);
 
 

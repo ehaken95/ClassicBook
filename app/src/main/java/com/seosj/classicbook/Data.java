@@ -1,7 +1,7 @@
 package com.seosj.classicbook;
 
 public class Data {
-
+    //RecyclerView Data
     private String title;
     private String content;
     private int resId;

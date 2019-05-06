@@ -15,6 +15,11 @@ import java.util.List;
 
 public class Menu1Fragment extends Fragment{
 
+    //메인화면
+    //
+    //
+    //
+    //
     private RecyclerAdapter_testinfo adapter;
     @Nullable
     @Override

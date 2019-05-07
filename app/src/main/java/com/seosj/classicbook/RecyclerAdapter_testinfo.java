@@ -1,5 +1,6 @@
 package com.seosj.classicbook;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -73,7 +74,17 @@ public class RecyclerAdapter_testinfo extends RecyclerView.Adapter<RecyclerAdapt
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.recycle_clickid:
-                    context.startActivity(new Intent(v.getContext(), Menu1_testinfo.class));
+                    TextView tx = v.findViewById(R.id.textView2);
+                    if(tx.getText().toString().equals("-")){
+                        //alertDialog띄우
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder
+                                .setMessage("예약한 시험이 없습니다.")
+                                .setPositiveButton("확인", (dialog, which)-> {} );
+                        builder.create().show();
+                    }else {
+                        context.startActivity(new Intent(v.getContext(), Menu1_testinfo.class));
+                    }
                     break;
 
             }

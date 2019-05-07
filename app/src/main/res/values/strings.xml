@@ -192,6 +192,14 @@
 
     <string name="text_test_locaion"><b>광108B</b></string>
 
+    <string name="text_test_inf">예약정보</string>
+
+    <string name="text_name">이름</string>
+    <string name="text_id">학번</string>
+    <string name="text_major">학과</string>
+    <string name="text_book_date">예약일자</string>
+    <string name="text_book_time">응시시간</string>
+    <string name="text_ifyourinfoiscor">정보가 맞다면 아래의 버튼을 클릭해주세요</string>
     <!--3번메뉴-->
     <string name="text_library"><u>학술정보원</u></string>
     <string name="text_library_search">고전도서 검색</string>
@@ -201,8 +209,6 @@
     <string name="text_search_book_result">검색결과</string>
     <string name="text_search_book_result_loc"><u>소장위치</u></string>
     <string name="text_search_book_result_num"><u>청구기호</u></string>
-
-
 
 
     <!--4번메뉴-->

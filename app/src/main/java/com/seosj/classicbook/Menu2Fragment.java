@@ -1,7 +1,9 @@
 package com.seosj.classicbook;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -86,6 +88,16 @@ public class Menu2Fragment extends Fragment{
                         .append(month+1).append("월 ")
                         .append(day).append("일")
             );
+        //기본 SharedPreference를 가져옴. (LoginActivity에서 설정한 pref)
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        //Preference 자료 수정을 위하여 editor 생성
+        SharedPreferences.Editor edit = sharedPref.edit();
+        //"set_term" 키의 값을 원하는 string으로 변경
+        edit.putString("Test_Date_Year", Integer.toString(year));
+        edit.putString("Test_Date_Month", Integer.toString(month+1));
+        edit.putString("Test_Date_Day", Integer.toString(day));
+        //변경된 값을 저장한다.
+        edit.commit();
     }
 
 

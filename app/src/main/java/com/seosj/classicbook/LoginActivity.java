@@ -1,8 +1,10 @@
 package com.seosj.classicbook;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,7 +23,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        //자동로그인 정보 저장
+        SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
         //자동로그인일 경우 메인으로 바로 가야한다!
+
+        //
 
         /*권한 얻기
         TedPermission.with(this)
@@ -52,15 +58,28 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //자동로그인 선택 상태 체크
+        //후에 바로 넘어가게 설정할 것
+        //저장만 했음. 로드는 추후에
         if(autoLogin.isChecked()){
             //TODO
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("auto_login","1");
+            editor.commit();
         }else{
             //TODO
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("auto_login","0");
+            editor.commit();
         }
 
 
         //다음화면 넘기기
-        button_login.setOnClickListener(v -> {
+        button_login.setOnClickListener((View v) -> {
+
+            //정보 저장
+
+
+
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         });

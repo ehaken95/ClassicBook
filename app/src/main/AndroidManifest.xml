@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Menu3_searchLibrary"></activity>
+        <activity android:name=".Menu2_testBookChoose"></activity>
+        <activity android:name=".Menu3_searchLibrary" />
         <activity android:name=".Menu1_testinfo" />
         <activity android:name=".Webview_setting_1" />
         <activity

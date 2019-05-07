@@ -28,13 +28,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="1.4">
 
             <TextView
-                android:id="@+id/text_menu_library_content"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_menu_test_bookname_tt"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:paddingStart="30dp"
                 android:paddingEnd="0dp"
                 android:text="@string/text_testbooktitle"
@@ -43,16 +47,17 @@
 
             <View
                 android:id="@+id/view3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="0.1" />
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="30dp"
+                android:layout_weight="0.3"
                 android:background="@drawable/ripple_effect_login"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
@@ -185,7 +190,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_setalarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -198,7 +203,7 @@
             android:textColor="@color/colorSejongRED" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/text_alarmlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

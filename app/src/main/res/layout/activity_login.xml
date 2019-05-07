@@ -42,9 +42,10 @@
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="0.7"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/sejong" />
 
             <LinearLayout
@@ -114,7 +115,7 @@
                 android:autoSizeTextType="uniform"
                 android:fontFamily="@font/namum"
                 android:gravity="center|start"
-                android:text="로그인"
+                android:text="@string/login"
                 android:textColor="@android:color/background_light" />
 
             <TextView
@@ -185,7 +186,7 @@
                 android:fontFamily="@font/namum"
                 android:paddingTop="7dp"
                 android:paddingBottom="7dp"
-                android:text="로그인"
+                android:text="@string/login"
                 android:textColor="@android:color/background_light" />
 
             <LinearLayout
@@ -208,7 +209,7 @@
                     android:layout_weight="1"
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/namum"
-                    android:text="자동로그인" />
+                    android:text="@string/auto_login" />
 
             </LinearLayout>
 

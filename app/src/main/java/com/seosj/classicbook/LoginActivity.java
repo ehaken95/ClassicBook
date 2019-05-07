@@ -1,12 +1,19 @@
 package com.seosj.classicbook;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.Toast;
+
+import com.gun0912.tedpermission.PermissionListener;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -16,8 +23,20 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        //자동로그인 정보 저장
+        SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
         //자동로그인일 경우 메인으로 바로 가야한다!
 
+        //
+
+        /*권한 얻기
+        TedPermission.with(this)
+                .setPermissionListener(permissionlistener)
+                .setRationaleMessage("권한 설정")
+                .setDeniedMessage("거부하셨습니다.\n어플리케이션을 원활히 이용하기 위해서는\n" +
+                        "[설정]->[어플리케이션]->[권한]에서 권한을 허용해 주시기 바랍니다.")
+                .setPermissions()
+        */
 
 
         EditText text_id = findViewById(R.id.textID);
@@ -39,14 +58,28 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //자동로그인 선택 상태 체크
+        //후에 바로 넘어가게 설정할 것
+        //저장만 했음. 로드는 추후에
         if(autoLogin.isChecked()){
             //TODO
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("auto_login","1");
+            editor.commit();
         }else{
             //TODO
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("auto_login","0");
+            editor.commit();
         }
 
 
-        button_login.setOnClickListener(v -> {
+        //다음화면 넘기기
+        button_login.setOnClickListener((View v) -> {
+
+            //정보 저장
+
+
+
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         });
@@ -58,7 +91,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    PermissionListener permissionlistener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            Toast.makeText(LoginActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
+        }
 
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+            Toast.makeText(LoginActivity.this, "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+
+    };
 
 
 }

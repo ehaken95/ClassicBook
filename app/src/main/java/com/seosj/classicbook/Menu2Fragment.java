@@ -27,6 +27,8 @@ public class Menu2Fragment extends Fragment{
     int mYear;
     int mMonth;
     int mDay;
+    int isweedendint;
+    public int isweekend=0;
     TextView DatePickerText;
     //시험 예약화면
 
@@ -69,8 +71,14 @@ public class Menu2Fragment extends Fragment{
                 mMonth = pickedDate.get(Calendar.MONTH),
                 mDay = pickedDate.get(Calendar.DAY_OF_MONTH)
 
-        );
 
+        );
+        isweedendint = pickedDate.get(Calendar.DAY_OF_WEEK);
+        switch(isweedendint){
+            case 1: case 2:
+                isweekend = 1;
+                break;
+        }
         datePickerDialog.getDatePicker().setMinDate(minDate.getTime().getTime());
         datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
 

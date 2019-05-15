@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     public String loginURL = "http://15.164.113.118:3000/?status=1&";
     public String loginID = "id=";
     public String loginPW = "&password=";
-
+    //public JsonObject json = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +172,6 @@ public class LoginActivity extends AppCompatActivity {
 
         ProgressDialog asyncDialog = new ProgressDialog(LoginActivity.this);
 
-        //로그인 실패 동작 아직 안했으
         private String url;
         private ContentValues values;
 
@@ -207,14 +206,6 @@ public class LoginActivity extends AppCompatActivity {
 
             System.out.println(result);
 
-            try{
-                for(int i=0; i<2;i++){
-                    Thread.sleep(1000);
-                }
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-
             return result;
         }
 
@@ -222,7 +213,13 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result){
             asyncDialog.dismiss();
             super.onPostExecute(result);
-            if(result.equals("{\"status\":\"0\"}")){
+
+            //json = new JsonObject();
+
+            JSONParser js = new JSONParser(result);
+            js.start();
+
+            if(js.stat.equals("0")){
                 Toast.makeText(LoginActivity.this,"ID와 PW를 확인해 주세요",Toast.LENGTH_SHORT).show();
             }else {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

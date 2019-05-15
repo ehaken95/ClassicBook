@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         // BottomNavigationView 메뉴를 선택할 때마다 위치가 변하지 않도록
         NavigationHelper.disableShiftMode(navigation);

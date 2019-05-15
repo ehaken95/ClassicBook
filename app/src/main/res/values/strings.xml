@@ -15,6 +15,8 @@
 
     <string name="user_hello">서성준님,\n안녕하세요</string>
     <!--1번메뉴텍스트-->
+    <string name="cat_tot">고전독서 인증</string>
+
     <string name="cat_1">서양의역\n사와사상</string>
     <string name="cat_2">동양의역\n사와사상</string>
     <string name="cat_3">동서양의\n문학</string>

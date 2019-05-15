@@ -41,9 +41,9 @@ public class Menu1Fragment extends Fragment{
         mContext= v.getContext();
 
         getData();
-
         return v;
     }
+
 
 
     private void getData(){

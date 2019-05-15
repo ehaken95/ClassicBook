@@ -13,10 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.gun0912.tedpermission.PermissionListener;
 
 import java.util.ArrayList;
@@ -32,14 +33,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-
 
         EditText text_id = findViewById(R.id.textID);
         EditText text_pw = findViewById(R.id.textPW);
         Button button_login=findViewById(R.id.buttonLogin);
-        ScrollView scrollView = findViewById(R.id.sv_root);
         CheckBox autoLogin = findViewById(R.id.autologin);
 
         //자동로그인 정보 저장
@@ -48,16 +45,12 @@ public class LoginActivity extends AppCompatActivity {
 
         //자동로그인일 경우 메인으로 바로 가야한다!
         //자동로그인->로그인창에서 로그인 버튼 안눌러도 자동 로그인 시도
-        //
-
-        Gson gson = new Gson();
-        //Json
-        //pref.getString("ID","");
-       // pref.getString("PW","");
+        //자동 로그인할때 로딩창 띄우기 시도도
 
         String auID = pref.getString("ID","null");
         String auPW = pref.getString("PW","null");
 
+        //자동로그인시 바로 로그인 시도
         if(pref.getString("auto_login","0").equals("1")){
             autoLogin.setChecked(true);
 
@@ -70,10 +63,6 @@ public class LoginActivity extends AppCompatActivity {
 
             LoginTask loginTask = new LoginTask(url,null);
             loginTask.execute();
-
-            //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            //startActivity(intent);
-            //finish();
         }
 
 
@@ -85,20 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                         "[설정]->[어플리케이션]->[권한]에서 권한을 허용해 주시기 바랍니다.")
                 .setPermissions()
         */
-
-
-
-
-
-        //editText.getText.toString();을 하면 String객체로 Text를 리턴하게 된다.
-        //또한 이 String이 공백인지 아닌지를 체크하기 위해서는 다음과 같이 처리를 해줘도 된다.
-
-
-        //으로 공백체크도 해줄 수 있다.
-
-
-
-
 
 
         //다음화면 넘기기
@@ -130,44 +105,25 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("PW",uPW);
                 editor.commit();
 
-                //자동로그인 선택 상태 체크
-                //후에 바로 넘어가게 설정할 것
-                //저장만 했음. 로드는 추후에
                 if(autoLogin.isChecked()){
                     //TODO
-                    System.out.println("autoautoauto true");
                     editor.putString("auto_login","1");
                     editor.commit();
                 }else{
                     //TODO
-                    System.out.println("autoautoauto false");
                     editor.putString("auto_login","0");
                     editor.commit();
                 }
-
-
-
 
                 String url = loginURL + loginID + uID + loginPW + uPW;
 
                 LoginTask loginTask = new LoginTask(url,null);
                 loginTask.execute();
-
-
-                //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                //startActivity(intent);
-                //finish();
             }
 
         });
 
-
-
-
-
-
     }
-    //{"status":"0"}
     public class LoginTask extends AsyncTask<String, Void, String>{
 
         ProgressDialog asyncDialog = new ProgressDialog(LoginActivity.this);
@@ -195,9 +151,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             //전송하기 위한 스트링 변수
-            String serversendletter;
             String turl = url;
-
 
             String result;
 
@@ -214,12 +168,51 @@ public class LoginActivity extends AppCompatActivity {
             asyncDialog.dismiss();
             super.onPostExecute(result);
 
-            //json = new JsonObject();
+            //파싱
+            JsonParser Parser = new JsonParser();
+            JsonObject jsonObj = (JsonObject) Parser.parse(result);
 
-            JSONParser js = new JSONParser(result);
-            js.start();
+            //전역변수에 저장선언
+            JSONParser jsglobal = (JSONParser)getApplicationContext();
 
-            if(js.stat.equals("0")){
+            jsglobal.setStat(jsonObj.get("status").getAsString());
+            jsglobal.setMajor(jsonObj.get("학과").getAsString());
+            jsglobal.setStu_num(jsonObj.get("학번").getAsString());
+            jsglobal.setStu_name(jsonObj.get("이름").getAsString());
+
+            jsglobal.setStat_auth((JsonArray) jsonObj.get("인증현황"));
+
+            for(int i = 0;i<jsglobal.getStat_auth().size();i++){
+                JsonObject object = (JsonObject)jsglobal.getStat_auth().get(i);
+                jsglobal.setStat_auth_seo(object.get("서양의 역사와 사상").getAsString());//서양 -> ~권
+                jsglobal.setStat_auth_dong(object.get("동양의 역사와 사상").getAsString());//동양 -> ~권
+                jsglobal.setStat_auth_dongseo(object.get("동서양의 문학").getAsString());//동서양
+                jsglobal.setStat_auth_science(object.get("과학 사상").getAsString());//과학
+                jsglobal.setStat_auth_tot(object.get("합계").getAsString());//합계
+
+            }
+
+            jsglobal.setStat_test_auth((JsonArray) jsonObj.get("시험인증현황"));
+            jsglobal.setStat_alter_auth((JsonArray) jsonObj.get("대체과목현황"));
+            jsglobal.setStat_challenge_auth((JsonArray) jsonObj.get("대회인증현황"));
+
+            //나머지 세부사항도 저장하셔야됩니다~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if(jsglobal.getStat().equals("0")){
                 Toast.makeText(LoginActivity.this,"ID와 PW를 확인해 주세요",Toast.LENGTH_SHORT).show();
             }else {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

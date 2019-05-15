@@ -107,18 +107,10 @@ public class Menu3_searchLibrary extends AppCompatActivity{
                 int j =0;
                 for(int i=0;i<div.size();i++){
                     switch(i%7){
-                        case 2:
-                            listStringloc.add(div.get(i).ownText());
-                            break;
-                        case 3:
-                            listStringnum.add(div.get(i).ownText());
-                            break;
-                        case 4:
-                            listStringrent.add(div.get(i).ownText());
-                            break;
-                        case 5:
-                            listStringdate.add(div.get(i).ownText());
-                            break;
+                        case 2: listStringloc.add(div.get(i).ownText()); break;
+                        case 3: listStringnum.add(div.get(i).ownText()); break;
+                        case 4: listStringrent.add(div.get(i).ownText()); break;
+                        case 5: listStringdate.add(div.get(i).ownText()); break;
                     }
                     j++;
                 }

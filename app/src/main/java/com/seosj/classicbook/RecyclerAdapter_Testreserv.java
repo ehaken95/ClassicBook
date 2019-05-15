@@ -33,8 +33,7 @@ public class RecyclerAdapter_Testreserv extends RecyclerView.Adapter<RecyclerAda
 
         //키의 값을 원하는 string으로 변경
         editor.putString("Test_Date_Year", "null");
-        editor.putString("Test_Date_Month", "null");
-        editor.putString("Test_Date_Day", "null");
+
         editor.commit();
 
         return new ItemViewHolder(view);
@@ -98,7 +97,7 @@ public class RecyclerAdapter_Testreserv extends RecyclerView.Adapter<RecyclerAda
                                     .setMessage("시험을 볼 날짜를 선택해 주세요.")
                                     .setPositiveButton("확인", (dialog, which)-> {} );
                             builder.create().show();
-                    } else {
+                    }else {
                         context.startActivity(intent);
                     }
                     break;

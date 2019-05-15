@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,14 +24,29 @@ public class Menu1Fragment extends Fragment{
     //
     //
     //
-    //
+
     public static Context mContext;
     private RecyclerAdapter_testinfo adapter;
+    private TextView textView_name;
+    private TextView textView_stat_tot;
+    private com.github.lzyzsd.circleprogress.ArcProgress arcProgress;
+    private com.seosj.classicbook.CustomCategory catseo;
+    private com.seosj.classicbook.CustomCategory catdong;
+    private com.seosj.classicbook.CustomCategory catdongseo;
+    private com.seosj.classicbook.CustomCategory catscience;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_1, container, false);
+
+        textView_name = v.findViewById(R.id.text_hellouser);
+        textView_stat_tot = v.findViewById(R.id.text_stat_tot);
+        arcProgress = v.findViewById(R.id.arc_progress);
+        catseo = v.findViewById(R.id.customcat1);
+        catdong = v.findViewById(R.id.customcat2);
+        catdongseo = v.findViewById(R.id.customcat3);
+        catscience = v.findViewById(R.id.customcat4);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView recyclerView = v.findViewById(R.id.recyclerView1);
@@ -40,11 +56,56 @@ public class Menu1Fragment extends Fragment{
         recyclerView.setAdapter(adapter);
         mContext= v.getContext();
 
+        setData();
         getData();
         return v;
     }
 
+    //로그인 정보에 맞게 메인화면 세팅하기
+    //서양 4권 동양 2권 동서양 3권 과학 1권
+    private void setData(){
+        JSONParser js = (JSONParser)mContext.getApplicationContext();
 
+        textView_name.setText(js.getStu_name() + "님,\n안녕하세요");
+
+        switch (js.getStat_auth_tot()){
+            case "0권": textView_stat_tot.setText("0/10권"); arcProgress.setProgress(0); break;
+            case "1권": textView_stat_tot.setText("1/10권"); arcProgress.setProgress(10); break;
+            case "2권": textView_stat_tot.setText("2/10권"); arcProgress.setProgress(20); break;
+            case "3권": textView_stat_tot.setText("3/10권"); arcProgress.setProgress(30); break;
+            case "4권": textView_stat_tot.setText("4/10권"); arcProgress.setProgress(40); break;
+            case "5권": textView_stat_tot.setText("5/10권"); arcProgress.setProgress(50); break;
+            case "6권": textView_stat_tot.setText("6/10권"); arcProgress.setProgress(60); break;
+            case "7권": textView_stat_tot.setText("7/10권"); arcProgress.setProgress(70); break;
+            case "8권": textView_stat_tot.setText("8/10권"); arcProgress.setProgress(80); break;
+            case "9권": textView_stat_tot.setText("9/10권"); arcProgress.setProgress(90); break;
+            case "10권": textView_stat_tot.setText("10/10권"); arcProgress.setProgress(100); break;
+        }
+
+        switch(js.getStat_auth_seo()){
+            case "0권": catseo.symbol2.setText("0/4권"); break;
+            case "1권": catseo.symbol2.setText("1/4권"); break;
+            case "2권": catseo.symbol2.setText("2/4권"); break;
+            case "3권": catseo.symbol2.setText("3/4권"); break;
+            case "4권": catseo.symbol2.setText("4/4권"); break;
+        }
+        switch(js.getStat_auth_dong()){
+            case "0권": catdong.symbol2.setText("0/2권"); break;
+            case "1권": catdong.symbol2.setText("1/2권"); break;
+            case "2권": catdong.symbol2.setText("2/2권"); break;
+        }
+        switch(js.getStat_auth_dongseo()){
+            case "0권": catdongseo.symbol2.setText("0/3권"); break;
+            case "1권": catdongseo.symbol2.setText("1/3권"); break;
+            case "2권": catdongseo.symbol2.setText("2/3권"); break;
+            case "3권": catdongseo.symbol2.setText("3/3권"); break;
+        }
+        switch(js.getStat_auth_science()){
+            case "0권": catscience.symbol2.setText("0/1권"); break;
+            case "1권": catscience.symbol2.setText("1/1권"); break;
+        }
+
+    }
 
     private void getData(){
 

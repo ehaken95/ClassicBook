@@ -1,16 +1,12 @@
 package com.seosj.classicbook;
 
 
+import android.app.Application;
+
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
 
 
-public class JSONParser {
-
-    //json으로 들어오는 string
-    private String str;
+public class JSONParser extends Application {
 
     public String stat;//status 0 -> 로긴 실패 status 1 ->로긴 성공
     public String major;//학과
@@ -31,54 +27,100 @@ public class JSONParser {
     public JsonArray stat_alter_auth;//대체과목현황
 
 
-
     public JsonArray stat_challenge_auth;//대회인증현황
 
 
-
-    public JSONParser(String str){
-        this.str = str;
+    //-------------------getter-------------------//
+    public String getStat() {
+        return stat;
     }
-    public void start() {
-        JsonParser Parser = new JsonParser();
-        JsonObject jsonObj = (JsonObject) Parser.parse(str);
-
-        System.out.println("status is" + jsonObj);
-        JsonPrimitive pri = (JsonPrimitive)jsonObj.get("status");
-
-
-        //System.out.println("status is 1 " + pri);
-
-        stat = jsonObj.get("status").getAsString();
-        major = jsonObj.get("학과").getAsString();
-        stu_num = jsonObj.get("학번").getAsString();
-        stu_name = jsonObj.get("이름").getAsString();
-
-
-        stat_auth = (JsonArray) jsonObj.get("인증현황");
-        for(int i = 0;i<stat_auth.size();i++){
-            JsonObject object = (JsonObject)stat_auth.get(i);
-            stat_auth_seo = object.get("서양의 역사와 사상").getAsString();//서양 -> ~권
-            stat_auth_dong = object.get("동양의 역사와 사상").getAsString();//동양
-            stat_auth_dongseo = object.get("동서양의 문학").getAsString();//동서양
-            stat_auth_science = object.get("과학 사상").getAsString();//과학
-            stat_auth_tot = object.get("합계").getAsString();//합계
-        }
-
-        stat_alter_auth = (JsonArray) jsonObj.get("대체과목현황");
-
-        stat_challenge_auth = (JsonArray) jsonObj.get("대회인증현황");
-
-
-
-
-
-
-
-
+    public String getMajor() {
+        return major;
     }
+    public String getStu_num() {
+        return stu_num;
+    }
+    public String getStu_name() {
+        return stu_name;
+    }
+    public JsonArray getStat_auth() {
+        return stat_auth;
+    }
+    public String getStat_auth_seo() {
+        return stat_auth_seo;
+    }
+    public String getStat_auth_dong() {
+        return stat_auth_dong;
+    }
+    public String getStat_auth_dongseo() {
+        return stat_auth_dongseo;
+    }
+    public String getStat_auth_science() {
+        return stat_auth_science;
+    }
+    public String getStat_auth_tot() {
+        return stat_auth_tot;
+    }
+    public JsonArray getStat_test_auth() {
+        return stat_test_auth;
+    }
+    public JsonArray getStat_alter_auth() {
+        return stat_alter_auth;
+    }
+    public JsonArray getStat_challenge_auth() {
+        return stat_challenge_auth;
+    }
+    //--------------------------------------------//
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
+    public void setMajor(String major) {
+        this.major = major;
+    }
+    public void setStu_num(String stu_num) {
+        this.stu_num = stu_num;
+    }
+    public void setStu_name(String stu_name) {
+        this.stu_name = stu_name;
+    }
+    public void setStat_auth(JsonArray stat_auth) {
+        this.stat_auth = stat_auth;
+    }
+    public void setStat_auth_seo(String stat_auth_seo) {
+        this.stat_auth_seo = stat_auth_seo;
+    }
+    public void setStat_auth_dong(String stat_auth_dong) {
+        this.stat_auth_dong = stat_auth_dong;
+    }
+    public void setStat_auth_dongseo(String stat_auth_dongseo) {
+        this.stat_auth_dongseo = stat_auth_dongseo;
+    }
+    public void setStat_auth_science(String stat_auth_science) {
+        this.stat_auth_science = stat_auth_science;
+    }
+    public void setStat_auth_tot(String stat_auth_tot) {
+        this.stat_auth_tot = stat_auth_tot;
+    }
+    public void setStat_test_auth(JsonArray stat_test_auth) {
+        this.stat_test_auth = stat_test_auth;
+    }
+    public void setStat_alter_auth(JsonArray stat_alter_auth) {
+        this.stat_alter_auth = stat_alter_auth;
+    }
+    public void setStat_challenge_auth(JsonArray stat_challenge_auth) {
+        this.stat_challenge_auth = stat_challenge_auth;
+    }
+    //-------------------------------------------//
 
 
+    @Override
+    public void onCreate(){
+        super.onCreate();
+    }
+    @Override
+    public void onTerminate(){
+        super.onTerminate();
+    }
 
 
 }

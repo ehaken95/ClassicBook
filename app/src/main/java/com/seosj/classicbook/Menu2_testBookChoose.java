@@ -99,7 +99,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
         JSONParser js = (JSONParser)getApplicationContext();
 
 
-
         //자동으로 불러
         stu_name.setText(js.getStu_name());
         stu_id.setText(js.getStu_num());
@@ -108,7 +107,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
         stu_date.setText(tdate);
         stu_time.setText(ttime);
         //
-
 
         //btn
         book1 = ArrayAdapter.createFromResource(this, R.array.book_cat,R.layout.spinner_settings);

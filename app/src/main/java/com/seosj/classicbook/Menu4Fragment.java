@@ -84,7 +84,4 @@ public class Menu4Fragment extends Fragment{
 
     }
 
-
-
-
 }

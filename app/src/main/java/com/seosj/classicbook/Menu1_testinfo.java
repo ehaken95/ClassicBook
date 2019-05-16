@@ -63,9 +63,7 @@ public class Menu1_testinfo extends AppCompatActivity {
 
         //bt_alarm.findViewById
 
-
         JSONParser js = (JSONParser) this.getApplicationContext();
-
 
         furl = url1 + js.getStu_num();
         curl = crul2 + js.getStu_num();
@@ -155,7 +153,6 @@ public class Menu1_testinfo extends AppCompatActivity {
             }
         }
 
-
     }
 
     public class Cancelinfo extends AsyncTask<String, Void, String> {
@@ -187,7 +184,6 @@ public class Menu1_testinfo extends AppCompatActivity {
             //전송하기 위한 스트링 변수
             String turl = url;
 
-
             String result;
 
             RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
@@ -217,7 +213,5 @@ public class Menu1_testinfo extends AppCompatActivity {
             finish();
 
         }
-
-
     }
 }

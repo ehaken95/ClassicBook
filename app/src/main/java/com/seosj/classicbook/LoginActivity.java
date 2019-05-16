@@ -22,6 +22,11 @@ import com.gun0912.tedpermission.PermissionListener;
 
 import java.util.ArrayList;
 
+/*
+* ******************************************
+* Copyright 2019. 서성준 all rights reserved.
+* ******************************************
+ */
 public class LoginActivity extends AppCompatActivity {
 
     public String loginURL = "http://15.164.113.118:3000/?status=1&";
@@ -41,11 +46,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //자동로그인 정보 저장
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-                //getSharedPreferences("pref",MODE_PRIVATE);
-
-        //자동로그인일 경우 메인으로 바로 가야한다!
-        //자동로그인->로그인창에서 로그인 버튼 안눌러도 자동 로그인 시도
-        //자동 로그인할때 로딩창 띄우기 시도도
 
         String auID = pref.getString("ID","null");
         String auPW = pref.getString("PW","null");
@@ -65,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
             loginTask.execute();
         }
 
-
         /*권한 얻기
         TedPermission.with(this)
                 .setPermissionListener(permissionlistener)
@@ -74,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                         "[설정]->[어플리케이션]->[권한]에서 권한을 허용해 주시기 바랍니다.")
                 .setPermissions()
         */
-
 
         //다음화면 넘기기
         button_login.setOnClickListener((View v) -> {
@@ -196,22 +194,6 @@ public class LoginActivity extends AppCompatActivity {
             jsglobal.setStat_alter_auth((JsonArray) jsonObj.get("대체과목현황"));
             jsglobal.setStat_challenge_auth((JsonArray) jsonObj.get("대회인증현황"));
 
-            //나머지 세부사항도 저장하셔야됩니다~~
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             if(jsglobal.getStat().equals("0")){
                 Toast.makeText(LoginActivity.this,"ID와 PW를 확인해 주세요",Toast.LENGTH_SHORT).show();
             }else {
@@ -221,11 +203,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-
-
     }
-
-
 
     PermissionListener permissionlistener = new PermissionListener() {
         @Override

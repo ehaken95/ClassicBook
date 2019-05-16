@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.seosj.classicbook">
-
+<!--
+* ******************************************
+* Copyright 2019. 서성준 all rights reserved.
+* ******************************************
+ -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Menu2_testBookChoose"/>
+        <activity android:name=".Main1_Detail"/>
+        <activity android:name=".Menu2_testBookChoose" />
         <activity android:name=".Menu3_searchLibrary" />
         <activity android:name=".Menu1_testinfo" />
         <activity android:name=".Webview_setting_1" />

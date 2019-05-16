@@ -98,10 +98,6 @@ public class Menu2Fragment extends Fragment implements DatePickerDialog.OnDateSe
             e.printStackTrace();
         }
 
-
-
-
-
     }
 
     private void setDate(){

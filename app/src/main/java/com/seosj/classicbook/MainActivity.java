@@ -7,6 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+/*
+ * ******************************************
+ * Copyright 2019. 서성준 all rights reserved.
+ * ******************************************
+ */
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
@@ -15,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private Menu2Fragment menu2Fragment = new Menu2Fragment();
     private Menu3Fragment menu3Fragment = new Menu3Fragment();
     private Menu4Fragment menu4Fragment = new Menu4Fragment();
-
-
-
 
     //인증현황 menu_home
     //예약신청 menu_reservation_test
@@ -48,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         BottomNavigationView navigation = findViewById(R.id.navigation);
         // BottomNavigationView 메뉴를 선택할 때마다 위치가 변하지 않도록
         NavigationHelper.disableShiftMode(navigation);
@@ -58,12 +57,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
 
-
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
-
-
 
     //뒤로가기 버튼을 두번 연속으로 눌러야 종료되게끔 하는 메소드
     private long time= 0;

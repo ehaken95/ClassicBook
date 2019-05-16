@@ -1,6 +1,8 @@
 package com.seosj.classicbook;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,7 +27,6 @@ public class Menu1Fragment extends Fragment{
     //
     //
     //
-
     public static Context mContext;
     private RecyclerAdapter_testinfo adapter;
     private TextView textView_name;
@@ -34,6 +36,7 @@ public class Menu1Fragment extends Fragment{
     private com.seosj.classicbook.CustomCategory catdong;
     private com.seosj.classicbook.CustomCategory catdongseo;
     private com.seosj.classicbook.CustomCategory catscience;
+    private LinearLayout lin;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class Menu1Fragment extends Fragment{
         catdong = v.findViewById(R.id.customcat2);
         catdongseo = v.findViewById(R.id.customcat3);
         catscience = v.findViewById(R.id.customcat4);
+        lin = v.findViewById(R.id.det);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView recyclerView = v.findViewById(R.id.recyclerView1);
@@ -55,7 +59,12 @@ public class Menu1Fragment extends Fragment{
         adapter = new RecyclerAdapter_testinfo();
         recyclerView.setAdapter(adapter);
         mContext= v.getContext();
-
+        lin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(v.getContext(),Main1_Detail.class));
+            }
+        });
         setData();
         getData();
         return v;
@@ -63,6 +72,7 @@ public class Menu1Fragment extends Fragment{
 
     //로그인 정보에 맞게 메인화면 세팅하기
     //서양 4권 동양 2권 동서양 3권 과학 1권
+    @SuppressLint("SetTextI18n")
     private void setData(){
         JSONParser js = (JSONParser)mContext.getApplicationContext();
 
@@ -106,6 +116,9 @@ public class Menu1Fragment extends Fragment{
         }
 
     }
+
+
+
 
     private void getData(){
 

@@ -21,11 +21,8 @@ public class JSONParser extends Application {
     public String stat_auth_tot;//합계
 
     public JsonArray stat_test_auth;//시험인증현황
-    //여기있는 data들 recyclerview로 getset해야죵~
-
 
     public JsonArray stat_alter_auth;//대체과목현황
-
 
     public JsonArray stat_challenge_auth;//대회인증현황
 
@@ -70,7 +67,7 @@ public class JSONParser extends Application {
     public JsonArray getStat_challenge_auth() {
         return stat_challenge_auth;
     }
-    //--------------------------------------------//
+    //--------------------setter------------------------//
     public void setStat(String stat) {
         this.stat = stat;
     }

@@ -41,6 +41,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/det"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
@@ -108,7 +109,7 @@
                 custom:arc_stroke_width="13dp"
                 custom:arc_suffix_text=" "
                 custom:arc_text_color="#ffffff"
-                custom:arc_text_size="80sp"
+                custom:arc_text_size="50sp"
                 custom:arc_unfinished_color="#000000" />
 
             <View

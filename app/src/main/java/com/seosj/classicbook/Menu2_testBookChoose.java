@@ -1,8 +1,11 @@
 package com.seosj.classicbook;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -29,14 +32,47 @@ public class Menu2_testBookChoose extends AppCompatActivity {
     String ISBN = "0";
     String ISBN_sel="1";
 
-    String sid;
-    String name;
+    String yoil;
     String tdate;
     String ttime;
 
     View header;
     TextView textdate;
     TextView textname;
+
+    String url = "http://15.164.113.118:3000/?status=2";
+    String urlid ="&id=";
+    String urlti ="&title=";
+    String urlhak = "&hakgi=2019-1학기";
+    String urldate = "&date=";
+    String urltime = "&time=";
+    String urlday = "&day=";
+
+    String infodate;
+    String infoname;
+    /*
+    //status = 2 (예약정보 db에 insert)
+
+    //url
+    http://15.164.113.118:3000/?status=2&id=14011110&title=총균쇠&hakgi=2017-2학기&date=2018-09-18&time=04:00&day=월
+
+    //변수
+    status : 2
+    id : 학번
+    title : 책이름
+    hakgi : 학기
+    data : 날짜
+    time : 시간
+    day : 요일정보
+
+    전부 스트링형태로 db저장됨
+
+    //리턴값
+
+    만약 예약정보가 있으면 {"id" : "0"}
+    예약정보가 없으면 {"id" : "1"}  뜨고 데이터 저장함
+
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,22 +92,21 @@ public class Menu2_testBookChoose extends AppCompatActivity {
         //기본 SharedPreference를 가져옴. (LoginActivity에서 설정한 pref)
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        tdate = sharedPref.getString("Test_Date_Year","null") + "-"+
-                sharedPref.getString("Test_Date_Month","null") + "-"+
-                sharedPref.getString("Test_Date_Day","null");
-
+        tdate = sharedPref.getString("Test_Date_Year","null");
         Intent intent = getIntent();
         ttime = intent.getExtras().getString("time");
 
-        //자동으로 불러와야함
-        stu_name.setText("서성준");
-        stu_id.setText("14011125");
-        stu_major.setText("컴퓨터공학과");
+        JSONParser js = (JSONParser)getApplicationContext();
+
+
+        //자동으로 불러
+        stu_name.setText(js.getStu_name());
+        stu_id.setText(js.getStu_num());
+        stu_major.setText(js.getMajor());
         //
         stu_date.setText(tdate);
         stu_time.setText(ttime);
         //
-
 
         //btn
         book1 = ArrayAdapter.createFromResource(this, R.array.book_cat,R.layout.spinner_settings);
@@ -106,7 +141,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                             //아무것도 선택안할시
-
                         }
                     });
 
@@ -135,7 +169,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                             //아무것도 선택안할시
-
                         }
                     });
                 }else if(book1.getItem(i).equals("동서양의문학")){
@@ -162,7 +195,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                             //아무것도 선택안할시
-
                         }
                     });
                 }else if(book1.getItem(i).equals("과학사상")){
@@ -189,7 +221,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                             //아무것도 선택안할시
-
                         }
                     });
                 }
@@ -212,7 +243,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                             //아무것도 선택안할시
-
                         }
                     });
                 }
@@ -234,37 +264,92 @@ public class Menu2_testBookChoose extends AppCompatActivity {
                             .setPositiveButton("확인", (dialog, which)-> {} );
                     builder.create().show();
                 }else {
-                    String infodate = tdate+"\n"+ttime;
-                    String infoname = "광108B\n" + "도서명: " + choice_select;
-
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("Book_Date",tdate);
-                    editor.putString("Book_Time",ttime);
-                    editor.putString("Book_Name",choice_select);
+
+                    infodate = tdate+"\n"+ttime;
+                    infoname = "광108B\n" + "도서명: " + choice_select;
 
                     editor.putString("info_date",infodate);
                     editor.putString("info_name",infoname);
-                    //개설년도,학기 설정
-                    editor.putString("Book_Course","2019년도 1학기");
                     editor.commit();
+                    yoil = sharedPref.getString("Yo","null");
 
+                    String sendurl = url + urlid + js.getStu_num()
+                            +urlti + choice_select + urlhak + urldate + tdate + urltime + ttime
+                            +urlday + yoil;
 
-                    header = getLayoutInflater().inflate(R.layout.recycle_thisweektest,null,false);
-                    textdate = header.findViewById(R.id.textView1);
-                    textname = header.findViewById(R.id.textView2);
-
-                    textdate.setText(infodate);
-                    textname.setText(infoname);
-
-                    Toast.makeText(v.getContext(), "예약을 성공하였습니다",Toast.LENGTH_SHORT).show();
-                    Intent inte = new Intent(v.getContext(),MainActivity.class);
-                    inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(inte);
-                    finish();
-
+                    TryReserv tryReserv = new TryReserv(sendurl, null);
+                    tryReserv.execute();
                 }
             }
         });
 
     }
+
+    public class TryReserv extends AsyncTask<String, Void, String> {
+
+        ProgressDialog asyncDialog = new ProgressDialog(Menu2_testBookChoose.this);
+
+        private String urlz;
+        private ContentValues values;
+
+        private TryReserv(String url, ContentValues values) {
+
+            this.urlz = url;
+            this.values = values;
+        }
+
+        @Override
+        protected void onPreExecute(){
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            asyncDialog.setMessage("잠시만 기다려 주세요...");
+
+            //show dialog
+            asyncDialog.show();
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            //전송하기 위한 스트링 변수
+
+            String turl = urlz;
+
+            String result;
+
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(turl, values);
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+            asyncDialog.dismiss();
+            super.onPostExecute(result);
+
+            if(result.equals("{\"id\":\"0\"}")){
+                Toast.makeText(Menu2_testBookChoose.this,"같은 주에 이미 예약하셨습니다. 다시 시도하세요",Toast.LENGTH_SHORT).show();
+            }else{
+                header = getLayoutInflater().inflate(R.layout.recycle_thisweektest,null,false);
+                textdate = header.findViewById(R.id.textView1);
+                textname = header.findViewById(R.id.textView2);
+
+                textdate.setText(infodate);
+                textname.setText(infoname);
+
+                Toast.makeText(Menu2_testBookChoose.this, "예약을 성공하였습니다",Toast.LENGTH_SHORT).show();
+                Intent inte = new Intent(getApplicationContext(),MainActivity.class);
+                inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(inte);
+                finish();
+            }
+        }
+    }
+
+
+
+
+
 }

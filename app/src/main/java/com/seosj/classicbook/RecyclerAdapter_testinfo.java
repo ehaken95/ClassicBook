@@ -89,8 +89,5 @@ public class RecyclerAdapter_testinfo extends RecyclerView.Adapter<RecyclerAdapt
 
             }
         }
-
-
-
     }
 }

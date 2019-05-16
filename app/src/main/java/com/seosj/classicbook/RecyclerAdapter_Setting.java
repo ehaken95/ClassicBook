@@ -1,6 +1,10 @@
 package com.seosj.classicbook;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,13 +19,15 @@ public class RecyclerAdapter_Setting extends RecyclerView.Adapter<RecyclerAdapte
 
     // adapter에 들어갈 list 입니다.
     private ArrayList<Data_Recycle_Setting> listData1 = new ArrayList<>();
-
+    public Context context;
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // LayoutInflater를 이용하여 전 단계에서 만들었던 item.xml을 inflate 시킵니다.
         // return 인자는 ViewHolder 입니다.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_settings, parent, false);
+        context = parent.getContext();
+
         return new ItemViewHolder(view);
     }
 
@@ -82,6 +88,26 @@ public class RecyclerAdapter_Setting extends RecyclerView.Adapter<RecyclerAdapte
                         Intent intent = new Intent(v.getContext(),Webview_setting_1.class);
                         intent.putExtra("case","2");
                         v.getContext().startActivity(intent);
+                    }else if(data.getTitle().equals("로그아웃")){
+                        //기본 SharedPreference를 가져옴. (LoginActivity에서 설정한 pref)
+                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+                        SharedPreferences.Editor editor = sharedPref.edit();
+
+                        //
+                        //주의
+                        //로그아웃시 모든 데이터 싹다 밀어야함
+                        //아직 구현 안함
+                        editor.remove("ID").commit();
+                        editor.remove("PW").commit();
+                        editor.putString("auto_login","0").commit();
+
+                        System.out.println("logout" + sharedPref.getString("ID","mull"));
+                        editor.commit();
+
+                        Intent inte = new Intent(v.getContext(),LoginActivity.class);
+                        inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        v.getContext().startActivity(inte);
+                        ((Activity)context).finish();
                     }
                     break;
             }

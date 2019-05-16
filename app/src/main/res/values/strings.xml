@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ClassicBook</string>
+    <string name="app_name">세종대학교\n고전독서인증</string>
     <string name="ID">학번</string>
     <string name="PW">비밀번호</string>
     <string name="login_SejongClassic">세종대학교\n고전독서인증</string>
@@ -13,8 +13,10 @@
     <string name="navi_3">도서 검색</string>
     <string name="navi_4">설정</string>
 
-    <string name="user_hello">서성준님,\n안녕하세요</string>
+    <string name="user_hello">홍길동님,\n안녕하세요</string>
     <!--1번메뉴텍스트-->
+    <string name="cat_tot">고전독서 인증</string>
+
     <string name="cat_1">서양의역\n사와사상</string>
     <string name="cat_2">동양의역\n사와사상</string>
     <string name="cat_3">동서양의\n문학</string>
@@ -35,8 +37,18 @@
     <string name="text_testinfodetail_1">개설년도/학기</string>
     <string name="text_testinfodetail_2">일자</string>
     <string name="text_testinfodetail_3">시간</string>
-
+    <string name="cancel_test">예약취소</string>
     <string name="text_setAlarm">시험 1시간 전 알림 설정</string>
+    <string name="blabla">blabla</string>
+    <string name="noalarm">현재 설정된 알림이 없습니다.</string>
+
+
+    <!--1번 Detail -->
+    <string name="text_detail1">영역별 인증</string>
+    <string name="text_detail2">과목 대체 인증</string>
+    <string name="text_detail3">대회 인증</string>
+
+    <!--1번 info -->
 
     <!--도서목록-->
 
@@ -170,7 +182,7 @@
     <!--2번메뉴-->
     <string name="text_classic"><u>대양휴머니티칼리지</u></string>
     <string name="text_reserv_test">인증 예약 신청</string>
-    <string name="text_select_test_book">한달 내 날짜만 선택 가능, 일주일에 1건만 예약 가능, 주말/공휴일 예약 불가</string>
+    <string name="text_select_test_book">한달 내 날짜만 선택 가능, 일주일에 1건만 예약 가능, 주말 예약 불가</string>
     <string name="datepick">예약일자</string>
     <string name="text_time">시간: </string>
     <string name="text_loc">장소: </string>
@@ -200,6 +212,7 @@
     <string name="text_book_date">예약일자</string>
     <string name="text_book_time">응시시간</string>
     <string name="text_ifyourinfoiscor">정보가 맞다면 아래의 버튼을 클릭해주세요</string>
+    <string name="apply">신청</string>
     <!--3번메뉴-->
     <string name="text_library"><u>학술정보원</u></string>
     <string name="text_library_search">고전도서 검색</string>
@@ -212,5 +225,5 @@
 
 
     <!--4번메뉴-->
-
+    <string name="profile">name님의 프로필</string>
 </resources>

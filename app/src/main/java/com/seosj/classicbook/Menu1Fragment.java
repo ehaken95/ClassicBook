@@ -1,11 +1,12 @@
 package com.seosj.classicbook;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +42,10 @@ public class Menu1Fragment extends Fragment{
     private com.seosj.classicbook.CustomCategory catdongseo;
     private com.seosj.classicbook.CustomCategory catscience;
     private LinearLayout lin;
+
+    public String furl;
+    public String url1 = "http://15.164.113.118:3000/?status=4&id=";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -122,29 +131,101 @@ public class Menu1Fragment extends Fragment{
 
     private void getData(){
 
-        //기본 SharedPreference를 가져옴. (LoginActivity에서 설정한 pref)
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String t1 = sharedPref.getString("info_date","00");
-        String t2 = sharedPref.getString("info_name","00");
+        JSONParser js = (JSONParser) mContext.getApplicationContext();
+        furl = url1 + js.getStu_num();
 
-        List<String> listTitle = new ArrayList<>();
-        List<String> listContent = new ArrayList<>();
-        if(t1.equals("00")) {
-            listTitle = Arrays.asList("예약한 시험이 없습니다.");
-            listContent = Arrays.asList("-");
-        }else {
-            listTitle = Arrays.asList(t1);
-            listContent = Arrays.asList(t2);
+        LoadtIn loadtIn = new LoadtIn(furl,null);
+        loadtIn.execute();
+    }
+
+
+    public class LoadtIn extends AsyncTask<String, Void, String> {
+
+        ProgressDialog asyncDialog = new ProgressDialog(Menu1Fragment.mContext);
+
+        private String url;
+        private ContentValues values;
+
+        private LoadtIn(String url, ContentValues values) {
+
+            this.url = url;
+            this.values = values;
         }
-        List<Integer> listResId = Arrays.asList(R.drawable.ic_button_clickarrow);
 
-        Data data = new Data();
-        data.setTitle(listTitle.get(0));
-        data.setContent(listContent.get(0));
-        data.setResId(listResId.get(0));
-        adapter.addItem(data);
+        @Override
+        protected void onPreExecute() {
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            asyncDialog.setMessage("잠시만 기다려 주세요...");
 
-        adapter.notifyDataSetChanged();
+            //show dialog
+            asyncDialog.show();
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            //전송하기 위한 스트링 변수
+            String turl = url;
+
+            String result;
+
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(turl, values);
+
+            System.out.println(result);
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            asyncDialog.dismiss();
+            super.onPostExecute(result);
+
+            //파싱
+            JsonParser jsonParser = new JsonParser();
+            JsonArray jsonArray = (JsonArray) jsonParser.parse(result);
+            JsonObject object = (JsonObject) jsonArray.get(0);
+            String tbid = object.get("id").getAsString();//학번
+            String tbname = object.get("title").getAsString();//책이름
+            String tbdate = object.get("date").getAsString();//날짜
+            String tbtime = object.get("time").getAsString();//시간
+
+            List<String> listTitle = new ArrayList<>();
+            List<String> listContent = new ArrayList<>();
+
+            if (tbid.equals("1")) {
+                listTitle = Arrays.asList("예약한 시험이 없습니다.");
+                listContent = Arrays.asList("-");
+
+                List<Integer> listResId = Arrays.asList(R.drawable.ic_button_clickarrow);
+
+                Data data = new Data();
+                data.setTitle(listTitle.get(0));
+                data.setContent(listContent.get(0));
+                data.setResId(listResId.get(0));
+                adapter.addItem(data);
+
+                adapter.notifyDataSetChanged();
+
+            } else {
+                String t = tbdate + "\n" + tbtime;
+                String n = "광108B\n" + "도서명: " + tbname;
+                listTitle = Arrays.asList(t);
+                listContent = Arrays.asList(n);
+
+                List<Integer> listResId = Arrays.asList(R.drawable.ic_button_clickarrow);
+
+                Data data = new Data();
+                data.setTitle(listTitle.get(0));
+                data.setContent(listContent.get(0));
+                data.setResId(listResId.get(0));
+                adapter.addItem(data);
+
+                adapter.notifyDataSetChanged();
+            }
+        }
 
     }
 

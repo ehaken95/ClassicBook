@@ -97,11 +97,8 @@ public class RecyclerAdapter_Setting extends RecyclerView.Adapter<RecyclerAdapte
                         //주의
                         //로그아웃시 모든 데이터 싹다 밀어야함
                         //아직 구현 안함
-                        editor.remove("ID").commit();
-                        editor.remove("PW").commit();
-                        editor.putString("auto_login","0").commit();
+                        editor.clear();
 
-                        System.out.println("logout" + sharedPref.getString("ID","mull"));
                         editor.commit();
 
                         Intent inte = new Intent(v.getContext(),LoginActivity.class);

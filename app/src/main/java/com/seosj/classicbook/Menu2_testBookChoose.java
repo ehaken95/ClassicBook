@@ -48,8 +48,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
     String urltime = "&time=";
     String urlday = "&day=";
 
-    String infodate;
-    String infoname;
     /*
     //status = 2 (예약정보 db에 insert)
 
@@ -264,14 +262,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
                             .setPositiveButton("확인", (dialog, which)-> {} );
                     builder.create().show();
                 }else {
-                    SharedPreferences.Editor editor = sharedPref.edit();
-
-                    infodate = tdate+"\n"+ttime;
-                    infoname = "광108B\n" + "도서명: " + choice_select;
-
-                    editor.putString("info_date",infodate);
-                    editor.putString("info_name",infoname);
-                    editor.commit();
                     yoil = sharedPref.getString("Yo","null");
 
                     String sendurl = url + urlid + js.getStu_num()
@@ -335,9 +325,6 @@ public class Menu2_testBookChoose extends AppCompatActivity {
                 header = getLayoutInflater().inflate(R.layout.recycle_thisweektest,null,false);
                 textdate = header.findViewById(R.id.textView1);
                 textname = header.findViewById(R.id.textView2);
-
-                textdate.setText(infodate);
-                textname.setText(infoname);
 
                 Toast.makeText(Menu2_testBookChoose.this, "예약을 성공하였습니다",Toast.LENGTH_SHORT).show();
                 Intent inte = new Intent(getApplicationContext(),MainActivity.class);

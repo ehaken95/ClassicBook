@@ -7,6 +7,8 @@
 * ******************************************
  -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".JSONParser"
@@ -38,6 +40,7 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait" />
+        <receiver android:name=".BroadcastD" android:process=":remote"/>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.seosj.classicbook;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -76,7 +77,9 @@ public class Menu2Fragment extends Fragment implements DatePickerDialog.OnDateSe
 
         String datee = Integer.toString(year)+Integer.toString((monthOfYear+1))+Integer.toString(dayOfMonth);
 
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMdd");
+
         try {
             Date nDate = dateFormat.parse(datee);
             Calendar cal = Calendar.getInstance();

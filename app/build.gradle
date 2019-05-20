@@ -37,4 +37,5 @@ dependencies {
     api 'org.jsoup:jsoup:1.11.3'
     api 'com.github.lzyzsd:circleprogress:1.2.1'
     implementation 'com.wdullaer:materialdatetimepicker:3.5.0'
+    implementation 'com.github.f0ris.sweetalert:library:1.5.6'
 }

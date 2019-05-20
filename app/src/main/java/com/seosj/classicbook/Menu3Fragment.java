@@ -1,6 +1,5 @@
 package com.seosj.classicbook;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Menu3Fragment extends Fragment{
     ArrayAdapter<CharSequence> book1,book2;
@@ -191,11 +192,10 @@ public class Menu3Fragment extends Fragment{
             public void onClick(View v){
                 if(ISBN.equals("0")){
                  //alertDialog띄우
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    builder
-                            .setMessage("책을 선택해 주세요")
-                            .setPositiveButton("확인", (dialog, which)-> {} );
-                   builder.create().show();
+                    new SweetAlertDialog(v.getContext(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("책을 선택해 주세요.")
+                            .show();
+
                 }else {
 
                     Intent intent = new Intent(v.getContext(), Menu3_searchLibrary.class);

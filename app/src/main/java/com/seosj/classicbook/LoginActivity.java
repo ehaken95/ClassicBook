@@ -1,10 +1,9 @@
 package com.seosj.classicbook;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,6 +20,8 @@ import com.google.gson.JsonParser;
 import com.gun0912.tedpermission.PermissionListener;
 
 import java.util.ArrayList;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /*
 * ******************************************
@@ -79,20 +80,14 @@ public class LoginActivity extends AppCompatActivity {
 
             if ( text_id.getText().toString().length() == 0 ) {
                 //공백일 때 처리할 내용
-                //alertDialog띄우
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder
-                        .setMessage("ID를 입력해 주세요")
-                        .setPositiveButton("확인", (dialog, which)-> {} );
-                builder.create().show();
+                new SweetAlertDialog(this)
+                        .setTitleText("ID를 입력해 주세요")
+                        .show();
             } else if(text_pw.getText().toString().length() == 0){
                 //공백일 때 처리할 내용
-                //alertDialog띄우
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder
-                        .setMessage("PW를 입력해 주세요")
-                        .setPositiveButton("확인", (dialog, which)-> {} );
-                builder.create().show();
+                new SweetAlertDialog(this)
+                        .setTitleText("PW를 입력해 주세요")
+                        .show();
             }else {
                 String uID;
                 String uPW;
@@ -124,7 +119,8 @@ public class LoginActivity extends AppCompatActivity {
     }
     public class LoginTask extends AsyncTask<String, Void, String>{
 
-        ProgressDialog asyncDialog = new ProgressDialog(LoginActivity.this);
+        SweetAlertDialog pDialog = new SweetAlertDialog(LoginActivity.this,SweetAlertDialog.PROGRESS_TYPE);
+        //ProgressDialog asyncDialog = new ProgressDialog(LoginActivity.this);
 
         private String url;
         private ContentValues values;
@@ -137,11 +133,17 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute(){
-            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            asyncDialog.setMessage("잠시만 기다려 주세요...");
-
+            pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+            pDialog.setTitleText("로그인 중입니다...");
+            pDialog.setCancelable(false);
             //show dialog
-            asyncDialog.show();
+            pDialog.show();
+
+
+           // asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+           // asyncDialog.setMessage("잠시만 기다려 주세요...");
+
+           // asyncDialog.show();
 
             super.onPreExecute();
         }
@@ -163,7 +165,8 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result){
-            asyncDialog.dismiss();
+            pDialog.dismiss();
+            //asyncDialog.dismiss();
             super.onPostExecute(result);
 
             //파싱
@@ -195,7 +198,12 @@ public class LoginActivity extends AppCompatActivity {
             jsglobal.setStat_challenge_auth((JsonArray) jsonObj.get("대회인증현황"));
 
             if(jsglobal.getStat().equals("0")){
-                Toast.makeText(LoginActivity.this,"ID와 PW를 확인해 주세요",Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("오류")
+                        .setContentText("ID와 PW를 확인해 주세요")
+                        .show();
+ //               Toast.makeText(LoginActivity.this,"ID와 PW를 확인해 주세요",Toast.LENGTH_SHORT).show();
+
             }else {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);

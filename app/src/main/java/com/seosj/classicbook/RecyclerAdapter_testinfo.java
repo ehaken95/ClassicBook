@@ -1,6 +1,5 @@
 package com.seosj.classicbook;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class RecyclerAdapter_testinfo extends RecyclerView.Adapter<RecyclerAdapter_testinfo.ItemViewHolder> {
 
@@ -77,11 +78,9 @@ public class RecyclerAdapter_testinfo extends RecyclerView.Adapter<RecyclerAdapt
                     TextView tx = v.findViewById(R.id.textView2);
                     if(tx.getText().toString().equals("-")){
                         //alertDialog띄우
-                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                        builder
-                                .setMessage("예약한 시험이 없습니다.")
-                                .setPositiveButton("확인", (dialog, which)-> {} );
-                        builder.create().show();
+                        new SweetAlertDialog(v.getContext(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("예약한 시험이 없습니다.")
+                                .show();
                     }else {
                         context.startActivity(new Intent(v.getContext(), Menu1_testinfo.class));
                     }

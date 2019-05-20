@@ -1,6 +1,5 @@
 package com.seosj.classicbook;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -16,6 +15,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Menu2_testBookChoose extends AppCompatActivity {
 
@@ -256,11 +257,9 @@ public class Menu2_testBookChoose extends AppCompatActivity {
             public void onClick(View v){
                 if(ISBN.equals("0")){
                     //alertDialog띄우
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    builder
-                            .setMessage("책을 선택해 주세요")
-                            .setPositiveButton("확인", (dialog, which)-> {} );
-                    builder.create().show();
+                    new SweetAlertDialog(Menu2_testBookChoose.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("책을 선택해 주세요.")
+                            .show();
                 }else {
                     yoil = sharedPref.getString("Yo","null");
 
@@ -320,7 +319,10 @@ public class Menu2_testBookChoose extends AppCompatActivity {
             super.onPostExecute(result);
 
             if(result.equals("{\"id\":\"0\"}")){
-                Toast.makeText(Menu2_testBookChoose.this,"같은 주에 이미 예약하셨습니다. 다시 시도하세요",Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(Menu2_testBookChoose.this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("같은 주에 이미 예약하셨습니다. 다시 시도하세요")
+                        .show();
+                //Toast.makeText(Menu2_testBookChoose.this,"같은 주에 이미 예약하셨습니다. 다시 시도하세요",Toast.LENGTH_SHORT).show();
             }else{
                 header = getLayoutInflater().inflate(R.layout.recycle_thisweektest,null,false);
                 textdate = header.findViewById(R.id.textView1);

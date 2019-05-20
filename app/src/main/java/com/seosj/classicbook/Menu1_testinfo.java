@@ -1,7 +1,7 @@
 package com.seosj.classicbook;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -22,9 +22,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Menu1_testinfo extends AppCompatActivity {
 
@@ -33,9 +33,10 @@ public class Menu1_testinfo extends AppCompatActivity {
     TextView tx2;
     TextView tx3;
     TextView txAlarm;
+    TextView txAlarmlist;
     Button bt_cancel;
     Button bt_alarm;
-
+    public String isal;
     public String adate;
     public String atime;
     public String[] ldate;
@@ -62,6 +63,7 @@ public class Menu1_testinfo extends AppCompatActivity {
      */
 
     //테스트 예약 정보부분
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,7 @@ public class Menu1_testinfo extends AppCompatActivity {
         tx2 = findViewById(R.id.text_menu_test_2_detail);
         tx3 = findViewById(R.id.text_menu_test_3_detail);
         txAlarm = findViewById(R.id.text_alarmlist);
+        txAlarmlist = findViewById(R.id.text_alarmlist2);
 
         bt_cancel = findViewById(R.id.btn_cancel);
 
@@ -81,114 +84,110 @@ public class Menu1_testinfo extends AppCompatActivity {
 
         furl = url1 + js.getStu_num();
         curl = crul2 + js.getStu_num();
+
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        isal = sharedPref.getString("Alarm","null");
+
         LoadInfo loadInfo = new LoadInfo(furl, null);
         loadInfo.execute();
 
         tx1.setText("2019년도 1학기");
 
-        AlarmUtil au = new AlarmUtil();
-        AlarmHATT ah = new AlarmHATT(getApplicationContext());
-        bt_alarm.setOnClickListener((View v) -> {
-            Toast.makeText(getApplicationContext(), "예약알림을 설정하였습니다.",
-                    Toast.LENGTH_SHORT).show();
 
-            ah.Alarm();
-            Calendar calendar = Calendar.getInstance();
-            au.setAlarm(this,calendar,0);
-            txAlarm.setText(adate +" "+atime+" 1시간 전 알림 설정");
+
+
+        AlarmHATT ah = new AlarmHATT(getApplicationContext());
+
+
+
+        bt_alarm.setOnClickListener((View v) -> {
+            if(txAlarm.getText().toString().equals("현재 설정된 알림이 없습니다.")) {
+                SharedPreferences.Editor ed = sharedPref.edit();
+                ed.putString("Alarm","1");
+                ed.commit();
+                ah.Alarm();
+                txAlarmlist.setText("예약시간 :  \t"+ adate +" "+(Integer.parseInt(ltime[0])-1) + ":" + ltime[1]);
+                txAlarmlist.setVisibility(View.VISIBLE);
+                txAlarm.setVisibility(View.GONE);
+                new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("알림설정이 완료되었습니다.")
+                        .show();
+
+            }else{
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("이미 예약이 설정되어있습니다.")
+                        .show();
+            }
+
         });
 
         bt_cancel.setOnClickListener((View v) -> {
             //시험 정보 삭제
-            //alertDialog띄우
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            builder
-                    .setMessage("예약을 취소하시겠습니까?")
-                    .setPositiveButton("확인", (dialog, which) -> {
-
-                        Cancelinfo cancelinfo = new Cancelinfo(curl, null);
-                        cancelinfo.execute();
-
+            new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("예약 취소")
+                    .setContentText("예약을 취소하겠습니까?")
+                    .setConfirmText("예약취소")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor ed = sharedPref.edit();
+                            ed.remove("Alarm");
+                            ed.commit();
+                            Cancelinfo cancelinfo = new Cancelinfo(curl, null);
+                            cancelinfo.execute();
+                        }
                     })
-                    .setNegativeButton("취소", (dialog, which) -> {
-                    });
-            builder.create().show();
-
+                    .setCancelButton("뒤로가기", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                        }
+                    })
+                    .show();
         });
 
-        txAlarm.setOnClickListener((View v) -> {
-            //시험 정보 삭제
-            //alertDialog띄우
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            builder
-                    .setMessage("알림을 취소하시겠습니까?")
-                    .setPositiveButton("확인", (dialog, which) -> {
-                        txAlarm.setText("현재 설정된 알림이 없습니다.");
-                        au.releaseAlarm(this,0);
+        txAlarmlist.setOnClickListener((View v) -> {
+            //알림 정보 삭제
+            new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("알림 취소")
+                    .setContentText("알림을 취소하겠습니까?")
+                    .setConfirmText("알림취소")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                            SharedPreferences.Editor ed = sharedPref.edit();
+                            ed.putString("Alarm","0");
+                            ed.commit();
+                            txAlarmlist.setVisibility(View.GONE);
+                            txAlarm.setVisibility(View.VISIBLE);
+                            ah.releaseAlarm(Menu1_testinfo.this,0);
+
+                        }
                     })
-                    .setNegativeButton("취소", (dialog, which) -> {
-                    });
-            builder.create().show();
+                    .setCancelButton("뒤로가기", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                        }
+                    })
+                    .show();
 
         });
     }
 
-    public class AlarmUtil {
-        private static final long FIVE_TO_HOUR = 1000 * 60 * 1; // 1분
 
-        // 알람 추가 메소드
-        public void setAlarm(Context context, Calendar cal, int requestCode){
-            AlarmManager fiveToHourAlarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-
-            Intent fiveIntent = new Intent(context, BroadcastD.class);
-
-            // FLAG_CANCEL_CURRENT : 이전에 생성한 PendingIntent 는 취소하고 새롭게 만든다
-            PendingIntent fiveSender = PendingIntent.getBroadcast(context, requestCode, fiveIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-            long localTime = System.currentTimeMillis();
-            long targetFiveTime = cal.getTimeInMillis();
-
-            // AlarmManager.INTERVAL_DAY : 24시간
-            if(localTime > targetFiveTime){
-                targetFiveTime += AlarmManager.INTERVAL_DAY;
-            }
-
-            if((targetFiveTime - localTime) < FIVE_TO_HOUR){
-                targetFiveTime += AlarmManager.INTERVAL_DAY;
-            }
-
-            fiveToHourAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, (targetFiveTime+FIVE_TO_HOUR), AlarmManager.INTERVAL_DAY, fiveSender);
-
-            SimpleDateFormat format = new SimpleDateFormat("MM/dd kk:mm:ss");
-            String setTargetFiveTime = format.format(new Date(targetFiveTime+FIVE_TO_HOUR));
-
-            Log.d("NotiTEST", "Onemin : " + setTargetFiveTime);
-        }
-
-        //알람 해제 메소드
-        public void releaseAlarm(Context context, int requestCode){
-            AlarmManager fiveToHourAlarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-
-            Intent fiveIntent = new Intent(context, BroadcastD.class);
-
-            PendingIntent fiveSender = PendingIntent.getBroadcast(context, requestCode, fiveIntent, 0);
-
-            fiveToHourAlarmManager.cancel(fiveSender);
-
-            Log.d("NotiTEST", "AlarmUtil Canel");
-        }
-    }
-
-
-
-
+    //알람 설정
     public class AlarmHATT {
         private Context context;
 
         public AlarmHATT(Context context) {
             this.context = context;
         }
-
+        // 알람 추가 메소드
         public void Alarm() {
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
             Intent intent = new Intent(Menu1_testinfo.this, BroadcastD.class);
@@ -198,21 +197,33 @@ public class Menu1_testinfo extends AppCompatActivity {
 
             Calendar calendar = Calendar.getInstance();
             //알람시간 calendar에 set해주기
-            ldate = adate.split("-");
-            ltime = atime.split(":");
+
             int year=Integer.parseInt(ldate[0]);
             int month=Integer.parseInt(ldate[1]);
             int day=Integer.parseInt(ldate[2]);
             int ho = Integer.parseInt(ltime[0]);
             int min = Integer.parseInt(ltime[1]);
 
-            calendar.set(year, month-1, day, ho, min, 0);
+            calendar.set(year, month-1, day, ho-1, min, 0);
 
             AlarmManager.AlarmClockInfo ac = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(),sender);
             am.setAlarmClock(ac, sender);
             am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
 
         }
+        //알람 취소
+        public void releaseAlarm(Context context, int requestCode){
+            AlarmManager fiveToHourAlarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+
+            Intent fiveIntent = new Intent(context, BroadcastD.class);
+            fiveIntent.setAction(BroadcastD.ACTION_RESTART_SERVICE);
+            PendingIntent fiveSender = PendingIntent.getBroadcast(context, requestCode, fiveIntent, 0);
+
+            fiveToHourAlarmManager.cancel(fiveSender);
+
+            Log.d("NotiTEST", "AlarmUtil Canel");
+        }
+
 
     }
 
@@ -272,7 +283,16 @@ public class Menu1_testinfo extends AppCompatActivity {
 
             adate = tbdate;
             atime = tbtime;
-
+            ldate = adate.split("-");
+            ltime = atime.split(":");
+            if(isal.equals("1")){
+                txAlarmlist.setText("예약시간 :  \t"+ adate +" "+(Integer.parseInt(ltime[0])-1) + ":" + ltime[1] + "\t");
+                txAlarmlist.setVisibility(View.VISIBLE);
+                txAlarm.setVisibility(View.GONE);
+            }else{
+                txAlarmlist.setVisibility(View.GONE);
+                txAlarm.setVisibility(View.VISIBLE);
+            }
             if (tbname.equals("1")) {
 
             } else {
@@ -335,7 +355,6 @@ public class Menu1_testinfo extends AppCompatActivity {
             ed.remove("info_name");
             ed.commit();
             Toast.makeText(getApplicationContext(), "예약을 취소하였습니다", Toast.LENGTH_SHORT).show();
-
             Intent inte = new Intent(getApplicationContext(), MainActivity.class);
             inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(inte);

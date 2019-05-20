@@ -1,6 +1,5 @@
 package com.seosj.classicbook;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class RecyclerAdapter_Testreserv extends RecyclerView.Adapter<RecyclerAdapter_Testreserv.ItemViewHolder> {
 
@@ -92,11 +93,9 @@ public class RecyclerAdapter_Testreserv extends RecyclerView.Adapter<RecyclerAda
                     //"set_term" 키의 값을 원하는 string으로 변경
                     if(sharedPref.getString("Test_Date_Year","null").equals("null")){
                             //alertDialog띄우
-                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                            builder
-                                    .setMessage("시험을 볼 날짜를 선택해 주세요.")
-                                    .setPositiveButton("확인", (dialog, which)-> {} );
-                            builder.create().show();
+                            new SweetAlertDialog(v.getContext(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("시험을 볼 날짜를 선택해 주세요.")
+                                .show();
                     }else {
                         context.startActivity(intent);
                     }

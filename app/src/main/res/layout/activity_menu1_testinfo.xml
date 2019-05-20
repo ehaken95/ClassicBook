@@ -206,12 +206,29 @@
             android:id="@+id/text_alarmlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:clickable="false"
             android:gravity="center"
-            android:clickable="true"
             android:text="@string/noalarm"
             android:textColor="#000000"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/text_alarmlist2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:clickable="true"
+            android:drawableRight="@drawable/ic_clear"
+            android:gravity="center"
+            android:text=""
+
+            android:textColor="#000000"
+            android:textSize="22sp" />
 
     </LinearLayout>
 </LinearLayout>

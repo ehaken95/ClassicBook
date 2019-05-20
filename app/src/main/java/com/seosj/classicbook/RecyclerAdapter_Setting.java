@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class RecyclerAdapter_Setting extends RecyclerView.Adapter<RecyclerAdapter_Setting.ItemViewHolder> {
 
     // adapter에 들어갈 list 입니다.
@@ -89,22 +91,37 @@ public class RecyclerAdapter_Setting extends RecyclerView.Adapter<RecyclerAdapte
                         intent.putExtra("case","2");
                         v.getContext().startActivity(intent);
                     }else if(data.getTitle().equals("로그아웃")){
-                        //기본 SharedPreference를 가져옴. (LoginActivity에서 설정한 pref)
-                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
-                        SharedPreferences.Editor editor = sharedPref.edit();
+                        new SweetAlertDialog(v.getContext(), SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("로그아웃시 알림설정이 전부 삭제됩니다.")
+                                .setContentText("계속하시겠습니까?")
+                                .setConfirmText("로그아웃")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismissWithAnimation();
+                                        //기본 SharedPreference를 가져옴. (LoginActivity에서 설정한 pref)
+                                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+                                        SharedPreferences.Editor editor = sharedPref.edit();
 
-                        //
-                        //주의
-                        //로그아웃시 모든 데이터 싹다 밀어야함
-                        //아직 구현 안함
-                        editor.clear();
+                                        editor.clear();
 
-                        editor.commit();
+                                        editor.commit();
 
-                        Intent inte = new Intent(v.getContext(),LoginActivity.class);
-                        inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        v.getContext().startActivity(inte);
-                        ((Activity)context).finish();
+                                        Intent inte = new Intent(v.getContext(),LoginActivity.class);
+                                        inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                        v.getContext().startActivity(inte);
+                                        ((Activity)context).finish();
+
+                                    }
+                                })
+                                .setCancelButton("뒤로가기", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismissWithAnimation();
+                                    }
+                                })
+                                .show();
+
                     }
                     break;
             }

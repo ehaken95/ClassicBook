@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Menu2Fragment menu2Fragment = new Menu2Fragment();
     private Menu3Fragment menu3Fragment = new Menu3Fragment();
     private Menu4Fragment menu4Fragment = new Menu4Fragment();
+    private MenuRankFragment menuRankFragment = new MenuRankFragment();
 
     //인증현황 menu_home
     //예약신청 menu_reservation_test
@@ -40,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.navigation_4:
                         transaction.replace(R.id.frame_layout,menu4Fragment).commitAllowingStateLoss();
+                        return true;
+                    case R.id.navigation_rank:
+                        transaction.replace(R.id.frame_layout,menuRankFragment).commitAllowingStateLoss();
                         return true;
                 }
                 return false;

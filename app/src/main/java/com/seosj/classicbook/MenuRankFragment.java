@@ -27,12 +27,13 @@ public class MenuRankFragment extends Fragment {
         mTabLayout = v.findViewById(R.id.tbl);
         mViewPager = v.findViewById(R.id.viewPG);
         mViewPagerApapter = new ViewPagerAdapter(
-                getFragmentManager(), mTabLayout.getTabCount());
-        mViewPager.setAdapter(mViewPagerApapter);
+                getChildFragmentManager(), 4);
 
         mViewPager.setCurrentItem(0);
-        mViewPager.addOnPageChangeListener(
-                new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mViewPager.setAdapter(mViewPagerApapter);
+
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -51,12 +52,23 @@ public class MenuRankFragment extends Fragment {
             }
         });
 
-
+        mViewPagerApapter.notifyDataSetChanged();
 
 
         return v;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        final int pos = 0;
+        mViewPager.postDelayed(new Runnable() {
 
+            @Override
+            public void run() {
+                mViewPager.setCurrentItem(pos);
+            }
+        }, 100);
+    }
 
 
 }

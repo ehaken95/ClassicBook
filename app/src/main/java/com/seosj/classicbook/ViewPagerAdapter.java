@@ -2,9 +2,9 @@ package com.seosj.classicbook;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private int mPageCount;
 
@@ -31,7 +31,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-
     public int getCount() {
 
         return mPageCount;

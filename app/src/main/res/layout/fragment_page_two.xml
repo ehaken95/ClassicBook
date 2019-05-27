@@ -19,7 +19,7 @@
             android:background="@drawable/ripple_effect_noround"
 
             android:gravity="center_vertical"
-            android:paddingStart="20dp"
+            android:paddingStart="0dp"
             android:paddingEnd="20dp"
             android:paddingBottom="0dp"
             android:weightSum="5">
@@ -28,7 +28,7 @@
             <ImageView
                 android:id="@+id/imageView_book1"
                 android:layout_width="wrap_content"
-                android:layout_height="140dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:scaleType="fitCenter"
@@ -37,10 +37,10 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="4.5"
                 android:orientation="vertical">
 
@@ -55,7 +55,8 @@
                     android:gravity="center|start"
                     android:text="TOP1"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/rank_title1"
@@ -70,7 +71,7 @@
                     android:maxLines="1"
                     android:text="도서명: 성학십도"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/rank_rate1"
@@ -82,7 +83,7 @@
                     android:gravity="start|center_vertical"
                     android:text="통과율: 82%"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -100,7 +101,7 @@
             android:background="@drawable/ripple_effect_noround"
 
             android:gravity="center_vertical"
-            android:paddingStart="20dp"
+            android:paddingStart="0dp"
             android:paddingEnd="20dp"
             android:paddingBottom="0dp"
             android:weightSum="5">
@@ -109,7 +110,7 @@
             <ImageView
                 android:id="@+id/imageView_book2"
                 android:layout_width="wrap_content"
-                android:layout_height="140dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:scaleType="fitCenter"
@@ -118,10 +119,10 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="4.5"
                 android:orientation="vertical">
 
@@ -136,7 +137,8 @@
                     android:gravity="center|start"
                     android:text="TOP2"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/rank_title2"
@@ -151,7 +153,7 @@
                     android:maxLines="1"
                     android:text="도서명: 북학의"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/rank_rate2"
@@ -163,7 +165,7 @@
                     android:gravity="start|center_vertical"
                     android:text="통과율: 78%"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -181,7 +183,7 @@
             android:background="@drawable/ripple_effect_noround"
 
             android:gravity="center_vertical"
-            android:paddingStart="20dp"
+            android:paddingStart="0dp"
             android:paddingEnd="20dp"
             android:paddingBottom="0dp"
             android:weightSum="5">
@@ -190,7 +192,7 @@
             <ImageView
                 android:id="@+id/imageView_book3"
                 android:layout_width="wrap_content"
-                android:layout_height="140dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:scaleType="fitCenter"
@@ -199,10 +201,10 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="4.5"
                 android:orientation="vertical">
 
@@ -217,7 +219,8 @@
                     android:gravity="center|start"
                     android:text="TOP3"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/rank_title3"
@@ -232,7 +235,7 @@
                     android:maxLines="1"
                     android:text="도서명: 조선상고사"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/rank_rate3"
@@ -244,7 +247,7 @@
                     android:gravity="start|center_vertical"
                     android:text="통과율: 72%"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -262,7 +265,7 @@
             android:background="@drawable/ripple_effect_noround"
 
             android:gravity="center_vertical"
-            android:paddingStart="20dp"
+            android:paddingStart="0dp"
             android:paddingEnd="20dp"
             android:paddingBottom="0dp"
             android:weightSum="5">
@@ -271,7 +274,7 @@
             <ImageView
                 android:id="@+id/imageView_book4"
                 android:layout_width="wrap_content"
-                android:layout_height="140dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:scaleType="fitCenter"
@@ -280,10 +283,10 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="4.5"
                 android:orientation="vertical">
 
@@ -298,7 +301,8 @@
                     android:gravity="center|start"
                     android:text="TOP4"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/rank_title4"
@@ -313,7 +317,7 @@
                     android:maxLines="1"
                     android:text="도서명: 삼국유사"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/rank_rate4"
@@ -325,7 +329,7 @@
                     android:gravity="start|center_vertical"
                     android:text="통과율: 69%"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -343,7 +347,7 @@
             android:background="@drawable/ripple_effect_noround"
 
             android:gravity="center_vertical"
-            android:paddingStart="20dp"
+            android:paddingStart="0dp"
             android:paddingEnd="20dp"
             android:paddingBottom="0dp"
             android:weightSum="5">
@@ -352,7 +356,7 @@
             <ImageView
                 android:id="@+id/imageView_book5"
                 android:layout_width="wrap_content"
-                android:layout_height="140dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:scaleType="fitCenter"
@@ -361,10 +365,10 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="4.5"
                 android:orientation="vertical">
 
@@ -379,7 +383,8 @@
                     android:gravity="center|start"
                     android:text="TOP5"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/rank_title5"
@@ -394,7 +399,7 @@
                     android:maxLines="1"
                     android:text="도서명: 논어-슬기바다1"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/rank_rate5"
@@ -406,7 +411,7 @@
                     android:gravity="start|center_vertical"
                     android:text="통과율: 57%"
                     android:textColor="#000000"
-                    android:textSize="26sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

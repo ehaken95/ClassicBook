@@ -170,45 +170,56 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             //파싱
-            JsonParser Parser = new JsonParser();
-            JsonObject jsonObj = (JsonObject) Parser.parse(result);
+            try {
+                JsonParser Parser = new JsonParser();
+                JsonObject jsonObj = (JsonObject) Parser.parse(result);
+                //전역변수에 저장선언
+                JSONParser jsglobal = (JSONParser)getApplicationContext();
 
-            //전역변수에 저장선언
-            JSONParser jsglobal = (JSONParser)getApplicationContext();
+                jsglobal.setStat(jsonObj.get("status").getAsString());
+                jsglobal.setMajor(jsonObj.get("학과").getAsString());
+                jsglobal.setStu_num(jsonObj.get("학번").getAsString());
+                jsglobal.setStu_name(jsonObj.get("이름").getAsString());
 
-            jsglobal.setStat(jsonObj.get("status").getAsString());
-            jsglobal.setMajor(jsonObj.get("학과").getAsString());
-            jsglobal.setStu_num(jsonObj.get("학번").getAsString());
-            jsglobal.setStu_name(jsonObj.get("이름").getAsString());
+                jsglobal.setStat_auth((JsonArray) jsonObj.get("인증현황"));
 
-            jsglobal.setStat_auth((JsonArray) jsonObj.get("인증현황"));
+                for(int i = 0;i<jsglobal.getStat_auth().size();i++){
+                    JsonObject object = (JsonObject)jsglobal.getStat_auth().get(i);
+                    jsglobal.setStat_auth_seo(object.get("서양의 역사와 사상").getAsString());//서양 -> ~권
+                    jsglobal.setStat_auth_dong(object.get("동양의 역사와 사상").getAsString());//동양 -> ~권
+                    jsglobal.setStat_auth_dongseo(object.get("동서양의 문학").getAsString());//동서양
+                    jsglobal.setStat_auth_science(object.get("과학 사상").getAsString());//과학
+                    jsglobal.setStat_auth_tot(object.get("합계").getAsString());//합계
 
-            for(int i = 0;i<jsglobal.getStat_auth().size();i++){
-                JsonObject object = (JsonObject)jsglobal.getStat_auth().get(i);
-                jsglobal.setStat_auth_seo(object.get("서양의 역사와 사상").getAsString());//서양 -> ~권
-                jsglobal.setStat_auth_dong(object.get("동양의 역사와 사상").getAsString());//동양 -> ~권
-                jsglobal.setStat_auth_dongseo(object.get("동서양의 문학").getAsString());//동서양
-                jsglobal.setStat_auth_science(object.get("과학 사상").getAsString());//과학
-                jsglobal.setStat_auth_tot(object.get("합계").getAsString());//합계
+                }
 
-            }
+                jsglobal.setStat_test_auth((JsonArray) jsonObj.get("시험인증현황"));
+                jsglobal.setStat_alter_auth((JsonArray) jsonObj.get("대체과목현황"));
+                jsglobal.setStat_challenge_auth((JsonArray) jsonObj.get("대회인증현황"));
 
-            jsglobal.setStat_test_auth((JsonArray) jsonObj.get("시험인증현황"));
-            jsglobal.setStat_alter_auth((JsonArray) jsonObj.get("대체과목현황"));
-            jsglobal.setStat_challenge_auth((JsonArray) jsonObj.get("대회인증현황"));
+                if(jsglobal.getStat().equals("0")){
+                    new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("오류")
+                            .setContentText("ID와 PW를 확인해 주세요")
+                            .show();
+                    //               Toast.makeText(LoginActivity.this,"ID와 PW를 확인해 주세요",Toast.LENGTH_SHORT).show();
 
-            if(jsglobal.getStat().equals("0")){
+                }else {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+
+
+
+            }catch (NullPointerException e){
                 new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("오류")
-                        .setContentText("ID와 PW를 확인해 주세요")
+                        .setContentText("서버와의 통신이 원활하지 않습니다. \n다시 시도해 주세요")
                         .show();
- //               Toast.makeText(LoginActivity.this,"ID와 PW를 확인해 주세요",Toast.LENGTH_SHORT).show();
-
-            }else {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }
+
         }
 
     }
